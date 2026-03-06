@@ -1,0 +1,581 @@
+/* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Variables ─────────────────────────────────────── */
+    :root {
+      --azul-oscuro:   #0D2B4E;
+      --azul-medio:    #1A4A7A;
+      --azul-claro:    #2A6FAD;
+      --naranja:       #F5820D;
+      --naranja-claro: #FF9F35;
+      --blanco:        #FFFFFF;
+      --gris-claro:    #F0F4F8;
+      --gris-texto:    #6B7A90;
+      --borde:       var(--borde);
+  --placeholder: var(--placeholder);
+  --gris-suave:  var(--gris-suave);
+  --azul-palido: var(--azul-palido);
+  --gris-bg:     var(--gris-bg);
+  --sombra:        0 20px 60px rgba(13, 43, 78, 0.18);
+    }
+
+    /* ─── Base ───────────────────────────────────────────── */
+    html, body {
+      height: 100%;
+      font-family: 'Nunito', sans-serif;
+      background: var(--azul-oscuro);
+      overflow: hidden;
+    }
+
+    /* ─── Fondo animado ──────────────────────────────────── */
+    .bg-wrapper {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0D2B4E 0%, #1A4A7A 50%, #0D2B4E 100%);
+      z-index: 0;
+    }
+
+    .bg-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(245, 130, 13, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 600px at 10% 80%, rgba(42, 111, 173, 0.15) 0%, transparent 70%);
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      from { opacity: 0.7; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── Partículas flotantes ───────────────────────────── */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border: 1.5px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      animation: floatUp linear infinite;
+    }
+
+    .particle:nth-child(1)  { width: 40px; height: 40px; left: 5%;  animation-duration: 18s; animation-delay: 0s;  transform: rotate(20deg); }
+    .particle:nth-child(2)  { width: 20px; height: 20px; left: 15%; animation-duration: 22s; animation-delay: 3s;  transform: rotate(45deg); }
+    .particle:nth-child(3)  { width: 60px; height: 60px; left: 25%; animation-duration: 16s; animation-delay: 1s;  transform: rotate(10deg); }
+    .particle:nth-child(4)  { width: 15px; height: 15px; left: 40%; animation-duration: 20s; animation-delay: 5s;  transform: rotate(60deg); }
+    .particle:nth-child(5)  { width: 35px; height: 35px; left: 55%; animation-duration: 24s; animation-delay: 2s;  transform: rotate(30deg); }
+    .particle:nth-child(6)  { width: 25px; height: 25px; left: 65%; animation-duration: 19s; animation-delay: 7s;  transform: rotate(75deg); }
+    .particle:nth-child(7)  { width: 50px; height: 50px; left: 75%; animation-duration: 17s; animation-delay: 4s;  transform: rotate(15deg); }
+    .particle:nth-child(8)  { width: 18px; height: 18px; left: 85%; animation-duration: 21s; animation-delay: 6s;  transform: rotate(50deg); }
+    .particle:nth-child(9)  { width: 45px; height: 45px; left: 90%; animation-duration: 23s; animation-delay: 1s;  transform: rotate(35deg); }
+    .particle:nth-child(10) { width: 30px; height: 30px; left: 35%; animation-duration: 15s; animation-delay: 9s;  transform: rotate(80deg); }
+
+    @keyframes floatUp {
+      0%   { bottom: -80px; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.4; }
+      100% { bottom: 110%; opacity: 0; }
+    }
+
+    /* ─── Layout principal ───────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    /* ─── Tarjeta ─────────────────────────────────────────── */
+    .card {
+      display: flex;
+      width: 100%;
+      max-width: 920px;
+      min-height: 540px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--sombra), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ─── Panel izquierdo (formulario) ───────────────────── */
+    .panel-form {
+      flex: 1;
+      background: var(--blanco);
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .panel-form::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--naranja) 0%, var(--naranja-claro) 100%);
+    }
+
+    /* ─── Logo ────────────────────────────────────────────── */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeSlideDown 0.6s 0.3s both;
+    }
+
+    .logo-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--azul-palido);
+      box-shadow: 0 4px 16px rgba(13, 43, 78, 0.15);
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-text-wrap { display: flex; flex-direction: column; }
+
+    .logo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1.5px;
+      color: var(--azul-oscuro);
+      line-height: 1;
+    }
+
+    .logo-name span { color: var(--naranja); }
+
+    .logo-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gris-texto);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ─── Títulos del formulario ─────────────────────────── */
+    .form-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--azul-oscuro);
+      margin-bottom: 6px;
+      animation: fadeSlideDown 0.6s 0.4s both;
+    }
+
+    .form-subtitle {
+      font-size: 13px;
+      color: var(--gris-texto);
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.6s 0.45s both;
+    }
+
+    /* ─── Selector de rol ────────────────────────────────── */
+    .role-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      animation: fadeSlideDown 0.6s 0.48s both;
+    }
+
+    .role-btn {
+      flex: 1;
+      height: 36px;
+      border-radius: 9px;
+      border: 1.5px solid var(--borde);
+      background: var(--gris-claro);
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gris-texto);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .role-btn.active {
+      border-color: var(--azul-claro);
+      background: rgba(42, 111, 173, 0.08);
+      color: var(--azul-medio);
+    }
+
+    .role-btn:hover:not(.active) {
+      border-color: var(--gris-suave);
+      background: var(--gris-bg);
+    }
+
+    .role-icon {
+      display: flex;
+      align-items: center;
+    }
+
+    /* ─── Campos del formulario ──────────────────────────── */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--azul-medio);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .field {
+      position: relative;
+      animation: fadeSlideDown 0.6s both;
+    }
+
+    .field:nth-child(1) { animation-delay: 0.5s; }
+    .field:nth-child(2) { animation-delay: 0.55s; }
+    .field:nth-child(3) { animation-delay: 0.6s; }
+
+    .field-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .field input {
+      width: 100%;
+      height: 50px;
+      padding: 0 14px 0 44px;
+      border: 1.5px solid var(--borde);
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--azul-oscuro);
+      background: var(--gris-claro);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .field input::placeholder {
+      color: var(--placeholder);
+      font-weight: 500;
+    }
+
+    .field input:focus {
+      border-color: var(--azul-claro);
+      background: var(--blanco);
+      box-shadow: 0 0 0 4px rgba(42, 111, 173, 0.12);
+    }
+
+    .field:focus-within .field-icon {
+      color: var(--azul-claro);
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gris-texto);
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .eye-btn:hover { color: var(--azul-claro); }
+
+    /* ─── Links y botón principal ────────────────────────── */
+    .links-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0 22px;
+      animation: fadeSlideDown 0.6s 0.65s both;
+    }
+
+    .link-small {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--azul-claro);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .link-small:hover { color: var(--naranja); }
+
+    .btn-login {
+      width: 100%;
+      height: 52px;
+      background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-claro) 100%);
+      border: none;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--blanco);
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(245, 130, 13, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+      animation: fadeSlideDown 0.6s 0.7s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(245, 130, 13, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 16px rgba(245, 130, 13, 0.30);
+    }
+
+    /* ─── Versión ─────────────────────────────────────────── */
+    .version-tag {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 11px;
+      color: var(--gris-suave);
+      font-weight: 600;
+      animation: fadeSlideDown 0.6s 0.8s both;
+    }
+
+    /* ─── Animación compartida ───────────────────────────── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Panel derecho (banner) ──────────────────────────── */
+    .panel-banner {
+      width: 340px;
+      flex-shrink: 0;
+      background: linear-gradient(160deg, var(--azul-medio) 0%, var(--azul-oscuro) 100%);
+      padding: 44px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .bc1 { width: 280px; height: 280px; top: -80px; right: -80px; }
+    .bc2 { width: 180px; height: 180px; bottom: -60px; left: -60px; }
+    .bc3 { width: 100px; height: 100px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+    .banner-line {
+      position: absolute;
+      top: 0;
+      right: 60px;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(245, 130, 13, 0.5) 40%,
+        rgba(245, 130, 13, 0.2) 80%,
+        transparent 100%
+      );
+    }
+
+    .banner-top { position: relative; z-index: 1; }
+
+    /* ─── Badge "Sistema activo" ─────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 130, 13, 0.18);
+      border: 1px solid rgba(245, 130, 13, 0.4);
+      border-radius: 20px;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--naranja);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .badge-text {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--naranja-claro);
+      text-transform: uppercase;
+    }
+
+    /* ─── Titular y descripción del banner ───────────────── */
+    .banner-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      line-height: 1.05;
+      letter-spacing: 1px;
+      color: var(--blanco);
+      margin-bottom: 14px;
+    }
+
+    .banner-headline span { color: var(--naranja-claro); }
+
+    .banner-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    /* ─── Lista de características ───────────────────────── */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 14px;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover { background: rgba(255, 255, 255, 0.09); }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-claro) 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-text { display: flex; flex-direction: column; }
+
+    .feature-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blanco);
+      line-height: 1.2;
+    }
+
+    .feature-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+    }
+
+    /* ─── Badge normativa ────────────────────────────────── */
+    .banner-bottom { position: relative; z-index: 1; }
+
+    .norm-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .norm-badge-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      background: rgba(245, 130, 13, 0.2);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .norm-text { display: flex; flex-direction: column; }
+
+    .norm-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--blanco);
+    }
+
+    .norm-sub {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+    }

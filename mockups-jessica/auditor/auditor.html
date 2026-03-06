@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DiagnostiSST — Auditor</title>
+<link rel="stylesheet" href="css/auditor.css" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="logo-row">
+      <div class="logo-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <div class="logo-name">FO<em>SST</em></div>
+        <div class="logo-sub">Res. 0312 · 2019</div>
+      </div>
+    </div>
+    <div class="empresa-chip">
+      <div class="ec-name">Constructora Andina S.A.S.</div>
+      <div class="ec-meta">NIT 900.234.567-3 · Cap. II · Riesgo IV<br>Auditoría Interna — Ene 2025</div>
+    </div>
+    <div class="role-chip">
+      <div class="rc-dot"></div>
+      <span class="rc-text">Auditor Externo SST</span>
+    </div>
+    <div class="ro-notice">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--naranja-claro)" stroke-width="2.2" class="flex-shrink-0 mt-2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <div class="ro-notice-text">Modo vista. Puede agregar hallazgos propios. No puede editar información de la empresa.</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Verificación</div>
+      <div class="nav-item active" onclick="showView('verificacion','Verificación de Cumplimiento')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Verificación de Cumplimiento
+      </div>
+      <div class="nav-item" onclick="showView('evidencias-ro','Ver Evidencias Cargadas')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+        Ver Evidencias Cargadas
+      </div>
+      <div class="nav-item" onclick="showView('autoevaluacion-ro','Ver Autoevaluación Anual')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Ver Autoevaluación
+      </div>
+      <div class="nav-item" onclick="showView('riesgos-ro','Ver Riesgos e Indicadores')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Ver Riesgos e Indicadores
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Mi Auditoría</div>
+      <div class="nav-item" onclick="showView('hallazgos','Registro de Hallazgos')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4z"/></svg>
+        Mis Hallazgos
+        <span class="ni-badge nb-red">4</span>
+      </div>
+      <div class="nav-item" onclick="showView('informe','Informe Final de Auditoría')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        Informe Final
+      </div>
+      <div class="nav-item" onclick="showView('historial','Historial de Auditorías')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Historial de Auditorías
+      </div>
+    </div>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="user-av">RV</div>
+      <div>
+        <div class="user-name">Ricardo Vargas</div>
+        <div class="user-role">Auditor Externo SST</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════ TOPBAR ═══════════════ -->
+<main class="main">
+  <div class="topbar">
+    <div class="tb-left">
+      <span class="tb-bc">DiagnostiSST</span>
+      <span class="tb-bc-sep"> › </span>
+      <span class="tb-active" id="breadcrumb">Verificación de Cumplimiento</span>
+    </div>
+    <div class="tb-right">
+      <span class="chip chip-purple">👁 SOLO LECTURA</span>
+      <span class="chip chip-blue">CAP. II · 21 EST.</span>
+      <button class="btn btn-ghost btn-sm" onclick="showView('hallazgos','Registro de Hallazgos')">✏️ Nuevo hallazgo</button>
+      <button class="btn btn-primary btn-sm" onclick="showView('informe','Informe Final de Auditoría')">📄 Informe final</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════════════════════════════════════════
+         VIEW 1: VERIFICACIÓN DE CUMPLIMIENTO
+    ════════════════════════════════════════ -->
+    <div id="view-verificacion" class="view active">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Verificación de Cumplimiento</div>
+          <div class="page-subtitle">Revisión independiente SG-SST · Constructora Andina S.A.S. · Enero 2025</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📥 Exportar tabla</button>
+        </div>
+      </div>
+
+      <div class="ro-banner">
+        <div class="ro-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div>
+          <div class="ro-banner-title">Vista de solo lectura — Auditor externo</div>
+          <div class="ro-banner-desc">Puede visualizar toda la información del sistema pero <strong>no puede editar, cargar ni modificar</strong> documentos. Sí puede registrar sus propios hallazgos en "Mis Hallazgos".</div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi k-purple"><div class="kpi-bg"></div>
+          <div class="kpi-label">Cumplimiento general</div>
+          <div class="kpi-val">62%</div>
+          <div class="kpi-desc">→ Moderadamente aceptable</div>
+        </div>
+        <div class="kpi k-blue"><div class="kpi-bg"></div>
+          <div class="kpi-label">Evidencias revisadas</div>
+          <div class="kpi-val">28</div>
+          <div class="kpi-desc">→ Docs cargados por resp. SST</div>
+        </div>
+        <div class="kpi k-red"><div class="kpi-bg"></div>
+          <div class="kpi-label">No conformidades</div>
+          <div class="kpi-val">4</div>
+          <div class="kpi-desc">↓ 2 mayores · 2 menores</div>
+        </div>
+        <div class="kpi k-orange"><div class="kpi-bg"></div>
+          <div class="kpi-label">Oportunidades</div>
+          <div class="kpi-val">3</div>
+          <div class="kpi-desc">→ Áreas para fortalecer</div>
+        </div>
+        <div class="kpi k-green"><div class="kpi-bg"></div>
+          <div class="kpi-label">Fortalezas</div>
+          <div class="kpi-val">5</div>
+          <div class="kpi-desc">↑ Estándares modelo</div>
+        </div>
+      </div>
+
+      <div class="g73">
+        <!-- Tabla verificación -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Tabla de Verificación por Estándar Mínimo</div><div class="card-sub">Estado declarado por empresa · Verificación auditor · Res. 0312/2019</div></div>
+            <span class="badge b-purple">👁 Solo lectura</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Est.</th><th>Ciclo</th><th>Estándar Mínimo</th><th>Pts</th><th>Estado empresa</th><th>Docs</th><th>Verificación</th><th>Hallazgo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- PLANEAR -->
+                <tr class="group-row group-p"><td colspan="8">📘 PLANEAR</td></tr>
+                <tr>
+                  <td class="est-num">1.1</td><td><span class="badge b-blue">P</span></td>
+                  <td class="text-sm fw-bold">Recursos financieros, técnicos y humanos</td>
+                  <td class="est-pts">4</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">2 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="est-num">1.2</td><td><span class="badge b-blue">P</span></td>
+                  <td class="text-sm fw-bold">Política SST firmada y comunicada</td>
+                  <td class="est-pts">1</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">1 doc</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="est-num">1.3</td><td><span class="badge b-blue">P</span></td>
+                  <td class="text-sm fw-bold">Evaluación inicial del SG-SST</td>
+                  <td class="est-pts">1</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">1 doc</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr class="bg-naranja-soft">
+                  <td class="est-num">1.4</td><td><span class="badge b-blue">P</span></td>
+                  <td class="text-sm fw-bold text-warning">Plan de trabajo anual — sin firma directivo</td>
+                  <td class="est-pts">2</td>
+                  <td><span class="badge b-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td><span class="badge b-gray">0 docs</span></td>
+                  <td><span class="badge b-orange">⚠ Parcial</span></td>
+                  <td class="text-xs fw-black text-warning">No conf. menor</td>
+                </tr>
+                <!-- HACER -->
+                <tr class="group-row group-h"><td colspan="8">⚙️ HACER</td></tr>
+                <tr>
+                  <td class="est-num">2.1</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold">Afiliación al Sistema de Seguridad Social Integral</td>
+                  <td class="est-pts">0.5</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">1 doc</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr class="bg-naranja-soft">
+                  <td class="est-num">2.2</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold text-warning">Capacitación SST — 16 trabajadores pendientes</td>
+                  <td class="est-pts">2</td>
+                  <td><span class="badge b-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td><span class="badge b-blue">1 doc</span></td>
+                  <td><span class="badge b-orange">⚠ Parcial</span></td>
+                  <td class="text-xs fw-black text-warning">Oportunidad</td>
+                </tr>
+                <tr class="bg-danger">
+                  <td class="est-num">2.3</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold text-danger">⚠ COPASST no constituido formalmente</td>
+                  <td class="est-pts">0.5</td>
+                  <td><span class="badge b-red"><span class="bdot"></span>No cumple</span></td>
+                  <td><span class="badge b-gray">0 docs</span></td>
+                  <td><span class="badge b-red">✗ No conforme</span></td>
+                  <td class="text-xs fw-black text-danger">No conf. MAYOR</td>
+                </tr>
+                <tr>
+                  <td class="est-num">2.4</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold">Comité de Convivencia Laboral</td>
+                  <td class="est-pts">0.5</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">2 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr class="bg-danger">
+                  <td class="est-num">2.5</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold text-danger">⚠ Sin investigación de AT y EL</td>
+                  <td class="est-pts">5</td>
+                  <td><span class="badge b-red"><span class="bdot"></span>No cumple</span></td>
+                  <td><span class="badge b-gray">0 docs</span></td>
+                  <td><span class="badge b-red">✗ No conforme</span></td>
+                  <td class="text-xs fw-black text-danger">No conf. MAYOR</td>
+                </tr>
+                <tr>
+                  <td class="est-num">2.6</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold">Identificación de peligros y valoración de riesgos</td>
+                  <td class="est-pts">15</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">3 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs fw-black text-success">Fortaleza</td>
+                </tr>
+                <tr>
+                  <td class="est-num">2.8</td><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="text-sm fw-bold">Exámenes médicos ocupacionales</td>
+                  <td class="est-pts">5</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">4 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs fw-black text-success">Fortaleza</td>
+                </tr>
+                <!-- VERIFICAR -->
+                <tr class="group-row group-v"><td colspan="8">✅ VERIFICAR</td></tr>
+                <tr class="bg-naranja-soft">
+                  <td class="est-num">3.1</td><td><span class="badge b-green" class="bg-success-light">V</span></td>
+                  <td class="text-sm fw-bold text-warning">Auditoria anual SG-SST — en curso</td>
+                  <td class="est-pts">5</td>
+                  <td><span class="badge b-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td><span class="badge b-blue">1 doc</span></td>
+                  <td><span class="badge b-orange">⚠ En verificación</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr>
+                  <td class="est-num">3.2</td><td><span class="badge b-green" class="bg-success-light">V</span></td>
+                  <td class="text-sm fw-bold">Revisión por alta dirección</td>
+                  <td class="est-pts">10</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">2 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <!-- ACTUAR -->
+                <tr class="group-row group-a"><td colspan="8">🔄 ACTUAR</td></tr>
+                <tr>
+                  <td class="est-num">4.1</td><td><span class="badge b-purple">A</span></td>
+                  <td class="text-sm fw-bold">Acciones preventivas y correctivas</td>
+                  <td class="est-pts">10</td>
+                  <td><span class="badge b-green"><span class="bdot"></span>Cumple</span></td>
+                  <td><span class="badge b-blue">2 docs</span></td>
+                  <td><span class="badge b-green">✓ Conforme</span></td>
+                  <td class="text-xs text-muted">—</td>
+                </tr>
+                <tr class="bg-naranja-soft">
+                  <td class="est-num">4.2</td><td><span class="badge b-purple">A</span></td>
+                  <td class="text-sm fw-bold text-warning">Plan de mejora — sin prioridades definidas</td>
+                  <td class="est-pts">10</td>
+                  <td><span class="badge b-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td><span class="badge b-gray">1 doc parcial</span></td>
+                  <td><span class="badge b-orange">⚠ Parcial</span></td>
+                  <td class="text-xs fw-black text-warning">No conf. menor</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel lateral verificación -->
+        <div class="flex-col-md">
+          <!-- Gauge cumplimiento -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Puntaje Verificado</div></div>
+            <div class="gauge-wrap">
+              <svg width="180" height="100" viewBox="0 0 180 100">
+                <defs>
+                  <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#DC2626"/>
+                    <stop offset="40%" stop-color="#D97706"/>
+                    <stop offset="100%" stop-color="#16A34A"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 15 90 A 75 75 0 0 1 165 90" fill="none" stroke="#E8EDF5" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 15 90 A 75 75 0 0 1 165 90" fill="none" stroke="url(#g1)" stroke-width="14" stroke-linecap="round" stroke-dasharray="235" stroke-dashoffset="90"/>
+                <line x1="90" y1="90" x2="54" y2="38" stroke="#0D2B4E" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="90" cy="90" r="5" fill="#0D2B4E"/>
+                <text x="15" y="102" fill="#DC2626" font-size="9" font-weight="700">0</text>
+                <text x="155" y="102" fill="#16A34A" font-size="9" font-weight="700">100</text>
+              </svg>
+              <div class="gauge-num">62</div>
+              <div class="gauge-label">Puntos sobre 100</div>
+              <span class="gauge-chip" class="bg-warning text-warning">⚠ MODERADO</span>
+            </div>
+          </div>
+
+          <!-- Estado por ciclo PHVA -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Por Ciclo PHVA</div></div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">📘 Planear</span><span class="prog-pct" class="text-info">75%</span></div>
+              <div class="prog-bar"><div class="prog-fill pf-blue" style="width:75%"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">⚙️ Hacer</span><span class="prog-pct" class="text-naranja">58%</span></div>
+              <div class="prog-bar"><div class="prog-fill pf-orange" style="width:58%"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">✅ Verificar</span><span class="prog-pct" class="text-success">70%</span></div>
+              <div class="prog-bar"><div class="prog-fill pf-green" style="width:70%"></div></div>
+            </div>
+            <div class="prog-item">
+              <div class="prog-header"><span class="prog-name">🔄 Actuar</span><span class="prog-pct" class="text-purple">50%</span></div>
+              <div class="prog-bar"><div class="prog-fill pf-purple" style="width:50%"></div></div>
+            </div>
+          </div>
+
+          <!-- Resumen hallazgos -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Mis Hallazgos</div><button class="btn btn-ghost btn-xs" onclick="showView('hallazgos','Registro de Hallazgos')">Ver todos</button></div>
+            <div class="flex-col-sm">
+              <div class="row-info row-info--danger">
+                <span class="text-sm fw-black text-danger">🔴 No conformidad mayor</span>
+                <span class="big-num big-num--red-xl">2</span>
+              </div>
+              <div class="row-info row-info--warning">
+                <span class="text-sm fw-black text-warning">🟡 No conformidad menor</span>
+                <span class="big-num big-num--orange-xl">2</span>
+              </div>
+              <div class="row-info row-info--warning">
+                <span class="text-sm fw-black text-warning">🔵 Oportunidad de mejora</span>
+                <span class="big-num big-num--orange-xl">3</span>
+              </div>
+              <div class="row-info row-info--success">
+                <span class="text-sm fw-black text-success">🟢 Fortaleza</span>
+                <span class="big-num big-num--green-xl">5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 2: EVIDENCIAS CARGADAS (SOLO LECTURA)
+    ════════════════════════════════════════ -->
+    <div id="view-evidencias-ro" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Evidencias Cargadas</div>
+          <div class="page-subtitle">Vista de documentos cargados por el Responsable SG-SST · Solo lectura</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📥 Exportar listado</button>
+        </div>
+      </div>
+
+      <div class="ro-banner">
+        <div class="ro-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div class="ro-banner-title">Documentos cargados por el Responsable del SG-SST</div>
+          <div class="ro-banner-desc">Solo puede descargar y visualizar. No puede subir, editar ni eliminar documentos.</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <!-- Estándar 1.1 -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Est. 1.1 — Recursos SST</div><div class="card-sub">2 documentos cargados</div></div>
+            <span class="badge b-green">✓ Conforme</span>
+          </div>
+          <div class="ev-item"><div class="ev-icon ev-pdf">📄</div><div class="ev-info"><div class="ev-name">Asignacion_Recursos_SST_2024.pdf</div><div class="ev-meta">Cargado por: María López · 12 ene 2025 · 2.3 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+          <div class="ev-item"><div class="ev-icon ev-doc">📋</div><div class="ev-info"><div class="ev-name">Acta_Designacion_Responsable.docx</div><div class="ev-meta">Cargado por: María López · 10 ene 2025 · 0.8 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+        </div>
+
+        <!-- Estándar 1.2 -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Est. 1.2 — Política SST</div><div class="card-sub">1 documento cargado</div></div>
+            <span class="badge b-green">✓ Conforme</span>
+          </div>
+          <div class="ev-item"><div class="ev-icon ev-pdf">📄</div><div class="ev-info"><div class="ev-name">Politica_SST_2024_Firmada.pdf</div><div class="ev-meta">Cargado por: María López · 15 ene 2025 · 1.1 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+        </div>
+
+        <!-- Estándar 2.6 Fortaleza -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Est. 2.6 — Matriz de Riesgos</div><div class="card-sub">3 documentos · Fortaleza del sistema</div></div>
+            <span class="badge b-green" class="bg-success-light">⭐ Fortaleza</span>
+          </div>
+          <div class="ev-item"><div class="ev-icon ev-xls">📊</div><div class="ev-info"><div class="ev-name">Matriz_Peligros_GTC45_2024.xlsx</div><div class="ev-meta">Cargado por: María López · 8 ene 2025 · 4.5 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+          <div class="ev-item"><div class="ev-icon ev-pdf">📄</div><div class="ev-info"><div class="ev-name">Inspecciones_Puestos_Trabajo.pdf</div><div class="ev-meta">Cargado por: María López · 9 ene 2025 · 2.1 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+          <div class="ev-item"><div class="ev-icon ev-img">🖼</div><div class="ev-info"><div class="ev-name">Registro_Fotografico_Riesgos.zip</div><div class="ev-meta">Cargado por: María López · 9 ene 2025 · 12.3 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+        </div>
+
+        <!-- Estándar 2.3 Sin docs -->
+        <div class="card" class="border-danger">
+          <div class="card-header">
+            <div><div class="card-title" class="text-danger">Est. 2.3 — COPASST</div><div class="card-sub">0 documentos · No conformidad mayor</div></div>
+            <span class="badge b-red">✗ Sin docs</span>
+          </div>
+          <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <div class="empty-text" class="text-danger">No se han cargado evidencias para este estándar.<br>Hallazgo registrado: No conformidad mayor.</div>
+          </div>
+        </div>
+
+        <!-- Estándar 2.8 -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Est. 2.8 — Exámenes Médicos</div><div class="card-sub">4 documentos cargados · Fortaleza</div></div>
+            <span class="badge b-green" class="bg-success-light">⭐ Fortaleza</span>
+          </div>
+          <div class="ev-item"><div class="ev-icon ev-pdf">📄</div><div class="ev-info"><div class="ev-name">Cronograma_Examenes_Medicos_2024.pdf</div><div class="ev-meta">Cargado por: María López · 5 ene 2025 · 0.9 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+          <div class="ev-item"><div class="ev-icon ev-xls">📊</div><div class="ev-info"><div class="ev-name">Listado_Examenes_Ingreso_Periodicos.xlsx</div><div class="ev-meta">Cargado por: María López · 5 ene 2025 · 1.2 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+          <div class="ev-item"><div class="ev-icon ev-pdf">📄</div><div class="ev-info"><div class="ev-name">Contrato_IPS_Ocupacional_2024.pdf</div><div class="ev-meta">Cargado por: María López · 6 ene 2025 · 3.4 MB</div></div><button class="btn btn-ghost btn-xs">👁 Ver</button></div>
+        </div>
+
+        <!-- Estándar 2.5 Sin docs -->
+        <div class="card" class="border-danger">
+          <div class="card-header">
+            <div><div class="card-title" class="text-danger">Est. 2.5 — Investigación AT y EL</div><div class="card-sub">0 documentos · No conformidad mayor</div></div>
+            <span class="badge b-red">✗ Sin docs</span>
+          </div>
+          <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <div class="empty-text" class="text-danger">No se han cargado evidencias para este estándar.<br>Hallazgo registrado: No conformidad mayor.<br><strong>Sanción potencial Art. 28: hasta 500 SMMLV</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 3: AUTOEVALUACIÓN (SOLO LECTURA)
+    ════════════════════════════════════════ -->
+    <div id="view-autoevaluacion-ro" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Autoevaluación Anual</div>
+          <div class="page-subtitle">Versión completada por Responsable SG-SST · Solo lectura del auditor</div>
+        </div>
+        <div class="page-actions">
+          <span class="chip chip-orange">⏰ Enviada: 10 Ene 2025</span>
+          <button class="btn btn-ghost btn-sm">📥 Exportar</button>
+        </div>
+      </div>
+
+      <div class="ro-banner">
+        <div class="ro-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div>
+          <div class="ro-banner-title">Autoevaluación diligenciada por María López — Responsable SG-SST</div>
+          <div class="ro-banner-desc">Solo puede ver las respuestas. Los hallazgos que identifique al comparar con sus verificaciones deben registrarlos en "Mis Hallazgos".</div>
+        </div>
+      </div>
+
+      <div class="g64">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Resultados por Ítem — Capítulo II</div><div class="card-sub">Declaración de cumplimiento de la empresa</div></div>
+            <span class="badge b-orange">62 / 100 pts</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Ciclo</th><th>Est.</th><th>Ítem evaluado</th><th>Puntos</th><th>Respuesta empresa</th><th>Puntos obtenidos</th></tr>
+              </thead>
+              <tbody>
+                <tr class="group-row group-p"><td colspan="6">📘 PLANEAR — Máx. 25 pts</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.1.1</td><td class="text-sm">Asignación de responsable SST</td><td class="est-pts">0.5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">0.5</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.1.2</td><td class="text-sm">Responsabilidades definidas</td><td class="est-pts">0.5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">0.5</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.1.3</td><td class="text-sm">Presupuesto y recursos asignados</td><td class="est-pts">1</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">1</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.1.7</td><td class="text-sm">Inducción y reinducción SST</td><td class="est-pts">2</td><td><span class="badge b-orange">En proceso</span></td><td class="fw-black text-warning">0</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.2.1</td><td class="text-sm">Política SST firmada</td><td class="est-pts">1</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">1</td></tr>
+                <tr><td><span class="badge b-blue">P</span></td><td class="est-num">1.3.1</td><td class="text-sm">Evaluación inicial del SG-SST</td><td class="est-pts">1</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">1</td></tr>
+                <tr class="bg-naranja-soft"><td><span class="badge b-blue">P</span></td><td class="est-num">1.4.1</td><td class="text-sm text-warning">Plan anual firmado por alta dirección</td><td class="est-pts">2</td><td><span class="badge b-orange">En proceso</span></td><td class="fw-black text-warning">0</td></tr>
+
+                <tr class="group-row group-h"><td colspan="6">⚙️ HACER — Máx. 60 pts</td></tr>
+                <tr><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.1.1</td><td class="text-sm">Afiliación a todos los sistema SS</td><td class="est-pts">0.5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">0.5</td></tr>
+                <tr class="bg-naranja-soft"><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.2.1</td><td class="text-sm text-warning">Plan de capacitación SST anual</td><td class="est-pts">2</td><td><span class="badge b-orange">En proceso</span></td><td class="fw-black text-warning">0</td></tr>
+                <tr class="bg-danger"><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.3.1</td><td class="text-sm text-danger">Conformación y funcionamiento COPASST</td><td class="est-pts">0.5</td><td><span class="badge b-red">✗ No cumple</span></td><td class="fw-black text-danger">0</td></tr>
+                <tr><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.4.1</td><td class="text-sm">Comité de Convivencia</td><td class="est-pts">0.5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">0.5</td></tr>
+                <tr class="bg-danger"><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.5.1</td><td class="text-sm text-danger">Investigación de AT y EL</td><td class="est-pts">5</td><td><span class="badge b-red">✗ No cumple</span></td><td class="fw-black text-danger">0</td></tr>
+                <tr><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.6.1</td><td class="text-sm">Identificación de peligros y valoración de riesgos</td><td class="est-pts">15</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">15</td></tr>
+                <tr><td><span class="badge b-orange" class="bg-warning text-warning">H</span></td><td class="est-num">2.8.1</td><td class="text-sm">Exámenes médicos ocupacionales</td><td class="est-pts">5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">5</td></tr>
+
+                <tr class="group-row group-v"><td colspan="6">✅ VERIFICAR — Máx. 5 pts</td></tr>
+                <tr><td><span class="badge b-green" class="bg-success-light">V</span></td><td class="est-num">3.2.1</td><td class="text-sm">Revisión por la alta dirección</td><td class="est-pts">5</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">5</td></tr>
+
+                <tr class="group-row group-a"><td colspan="6">🔄 ACTUAR — Máx. 10 pts</td></tr>
+                <tr><td><span class="badge b-purple">A</span></td><td class="est-num">4.1.1</td><td class="text-sm">Acciones preventivas y correctivas</td><td class="est-pts">10</td><td><span class="badge b-green">✓ Cumple</span></td><td class="fw-black text-success">10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Resumen puntuación -->
+        <div class="flex-col-md">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Resultado Final</div></div>
+            <div class="gauge-wrap">
+              <svg width="180" height="100" viewBox="0 0 180 100">
+                <path d="M 15 90 A 75 75 0 0 1 165 90" fill="none" stroke="#E8EDF5" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 15 90 A 75 75 0 0 1 165 90" fill="none" stroke="url(#g1)" stroke-width="14" stroke-linecap="round" stroke-dasharray="235" stroke-dashoffset="90"/>
+                <line x1="90" y1="90" x2="54" y2="38" stroke="#0D2B4E" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="90" cy="90" r="5" fill="#0D2B4E"/>
+              </svg>
+              <div class="gauge-num">62</div>
+              <div class="gauge-label">Puntos declarados</div>
+              <span class="gauge-chip" class="bg-warning text-warning">MODERADAMENTE ACEPTABLE</span>
+            </div>
+            <div class="sep"></div>
+            <div class="text-sm fw-bold text-muted lh-relaxed">
+              📌 <strong>Escala Res. 0312:</strong><br>
+              🟢 86–100: Aceptable<br>
+              🟡 61–85: Moderadamente aceptable<br>
+              🔴 0–60: Crítico
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Observaciones</div><div class="card-sub">Responsable SST</div></div>
+            <div class="code-block code-block--blue">
+              "Se están adelantando gestiones para la conformación del COPASST. La investigación de AT está pendiente de protocolo. El plan de trabajo requiere firma de gerencia."
+              <div class="mt-8 text-xs text-muted">— María López, Resp. SG-SST · 10 Ene 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 4: RIESGOS E INDICADORES (SOLO LECTURA)
+    ════════════════════════════════════════ -->
+    <div id="view-riesgos-ro" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Riesgos e Indicadores SST</div>
+          <div class="page-subtitle">Vista de indicadores de gestión y accidentalidad cargados por la empresa · Solo lectura</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📥 Exportar</button>
+        </div>
+      </div>
+
+      <div class="ro-banner">
+        <div class="ro-banner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>
+          <div class="ro-banner-title">Indicadores reportados por la empresa — Solo lectura</div>
+          <div class="ro-banner-desc">Puede comparar estos indicadores con sus hallazgos de verificación. Cualquier discrepancia debe quedar registrada como hallazgo.</div>
+        </div>
+      </div>
+
+      <div class="kpi-grid" class="grid-4">
+        <div class="kpi k-red"><div class="kpi-bg"></div>
+          <div class="kpi-label">AT registrados 2024</div>
+          <div class="kpi-val">3</div>
+          <div class="kpi-desc">↑ Sin investigar (Est. 2.5)</div>
+        </div>
+        <div class="kpi k-orange"><div class="kpi-bg"></div>
+          <div class="kpi-label">Días perdidos AT</div>
+          <div class="kpi-val">18</div>
+          <div class="kpi-desc">→ Tasa: 0.72 días/trab.</div>
+        </div>
+        <div class="kpi k-blue"><div class="kpi-bg"></div>
+          <div class="kpi-label">Trabajadores activos</div>
+          <div class="kpi-val">25</div>
+          <div class="kpi-desc">→ Todos afiliados SGSS</div>
+        </div>
+        <div class="kpi k-green"><div class="kpi-bg"></div>
+          <div class="kpi-label">Capacitados en SST</div>
+          <div class="kpi-val">9</div>
+          <div class="kpi-desc">→ 36% cumple cap. SST</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Indicadores de Accidentalidad</div><div class="card-sub">Reportados por la empresa · Año 2024</div></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Indicador</th><th>Valor empresa</th><th>Referencia</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr><td class="text-base fw-bold">Tasa de accidentalidad</td><td class="big-num big-num--red-md">12.0</td><td class="text-sm text-muted">&lt; 5 esperado</td><td><span class="badge b-red">Alto</span></td></tr>
+                <tr><td class="text-base fw-bold">Índice de frecuencia</td><td class="big-num big-num--orange-md">4.2</td><td class="text-sm text-muted">&lt; 3 esperado</td><td><span class="badge b-orange">Medio</span></td></tr>
+                <tr><td class="text-base fw-bold">Índice de severidad</td><td class="big-num big-num--orange-md">72.0</td><td class="text-sm text-muted">&lt; 50 esperado</td><td><span class="badge b-orange">Medio</span></td></tr>
+                <tr><td class="text-base fw-bold">% trabajadores capacitados</td><td class="big-num big-num--red-md">36%</td><td class="text-sm text-muted">100% requerido</td><td><span class="badge b-red">Crítico</span></td></tr>
+                <tr><td class="text-base fw-bold">Enfermedades laborales repor.</td><td class="big-num big-num--green-md">0</td><td class="text-sm text-muted">0 objetivo</td><td><span class="badge b-green">OK</span></td></tr>
+                <tr><td class="text-base fw-bold">Exámenes médicos al día</td><td class="big-num big-num--green-md">100%</td><td class="text-sm text-muted">100% requerido</td><td><span class="badge b-green">Cumple</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">Sanciones Potenciales Art. 28</div><div class="card-sub">Por incumplimientos actuales · Cálculo orientativo</div></div>
+          <div class="alert-left-danger">
+            <div class="label-section text-danger">⚠ Exposición legal total estimada</div>
+            <div class="big-num big-num--red-xxl">$45.6M</div>
+            <div class="text-sm fw-bold text-danger">COP · Multa potencial estimada según SMMLV 2025</div>
+          </div>
+          <div class="ib-row"><div class="ib-key">Sin COPASST (Est. 2.3)</div><div class="ib-val" class="text-danger">Hasta $11.4M</div></div>
+          <div class="ib-row"><div class="ib-key">Sin investigación AT (Est. 2.5)</div><div class="ib-val" class="text-danger">Hasta $22.8M</div></div>
+          <div class="ib-row"><div class="ib-key">Sin plan de trabajo firmado</div><div class="ib-val" class="text-warning">Hasta $5.7M</div></div>
+          <div class="ib-row"><div class="ib-key">Capacitación incompleta</div><div class="ib-val" class="text-warning">Hasta $5.7M</div></div>
+          <div class="note-block">
+            📌 Ref. Artículo 28 Ley 1562 de 2012. Cálculo basado en SMMLV 2025 ($1.423.500). Los valores son estimados orientativos para el auditor.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 5: REGISTRO DE HALLAZGOS
+    ════════════════════════════════════════ -->
+    <div id="view-hallazgos" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Registro de Hallazgos</div>
+          <div class="page-subtitle">Hallazgos propios del auditor · Constructora Andina S.A.S. · Ene 2025</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📥 Exportar hallazgos</button>
+          <button class="btn btn-primary btn-sm" onclick="document.getElementById('modal-hallazgo').classList.add('open')">✏️ Nuevo hallazgo</button>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="card" class="card-padded mb-18">
+        <div class="flex-tags">
+          <span class="text-sm fw-black text-dark">Filtrar por tipo:</span>
+          <button class="btn btn-danger btn-xs" onclick="filterHallazgos('mayor')">🔴 Mayores (2)</button>
+          <button class="btn btn-xs" class="badge-warning-outline" onclick="filterHallazgos('menor')">🟡 Menores (2)</button>
+          <button class="btn btn-xs" class="badge-warning-outline" onclick="filterHallazgos('oportunidad')">🔵 Oportunidades (3)</button>
+          <button class="btn btn-xs" class="badge-success-outline" onclick="filterHallazgos('fortaleza')">🟢 Fortalezas (5)</button>
+          <button class="btn btn-ghost btn-xs" onclick="filterHallazgos('todos')">Ver todos</button>
+        </div>
+      </div>
+
+      <div id="lista-hallazgos">
+        <!-- MAYOR 1 -->
+        <div class="hallazgo-card hc-mayor" data-tipo="mayor">
+          <div class="hc-type">🔴 No conformidad mayor — Est. 2.3</div>
+          <div class="hc-title">COPASST no constituido formalmente</div>
+          <div class="hc-desc">La empresa no ha conformado el Comité Paritario de Seguridad y Salud en el Trabajo según lo exige el Artículo 2.2.4.11.7 del Decreto 1072 de 2015. No se encontró evidencia de convocatoria, votación ni acta de constitución. Este incumplimiento tiene potencial de sanción directa por parte del MTE.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 12 Ene 2025</span>
+              <span>🔗 Est. 2.3 · Ciclo H</span>
+              <span>👤 Ricardo Vargas</span>
+              <span>⚡ Requiere acción inmediata</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAYOR 2 -->
+        <div class="hallazgo-card hc-mayor" data-tipo="mayor">
+          <div class="hc-type">🔴 No conformidad mayor — Est. 2.5</div>
+          <div class="hc-title">Ausencia de procedimiento de investigación de accidentes de trabajo</div>
+          <div class="hc-desc">Se registraron 3 accidentes de trabajo en 2024 sin que exista procedimiento documentado de investigación ni informes de AT diligenciados ante la ARL. Esto constituye una violación directa del Art. 28 de la Ley 1562 de 2012 y puede generar sanciones hasta de 500 SMMLV.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 12 Ene 2025</span>
+              <span>🔗 Est. 2.5 · Ciclo H</span>
+              <span>👤 Ricardo Vargas</span>
+              <span>💰 Hasta $22.8M en multas</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENOR 1 -->
+        <div class="hallazgo-card hc-menor" data-tipo="menor">
+          <div class="hc-type">🟡 No conformidad menor — Est. 1.4</div>
+          <div class="hc-title">Plan de trabajo anual sin firma de la alta dirección</div>
+          <div class="hc-desc">El plan de trabajo anual del SG-SST fue elaborado pero no cuenta con la firma del representante legal de la empresa, lo que le resta validez formal según los requisitos del estándar 1.4 de la Res. 0312/2019.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 13 Ene 2025</span>
+              <span>🔗 Est. 1.4 · Ciclo P</span>
+              <span>👤 Ricardo Vargas</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENOR 2 -->
+        <div class="hallazgo-card hc-menor" data-tipo="menor">
+          <div class="hc-type">🟡 No conformidad menor — Est. 4.2</div>
+          <div class="hc-title">Plan de mejora sin prioridades ni responsables asignados</div>
+          <div class="hc-desc">El plan de mejora del SG-SST existe pero no define prioridades, plazos ni responsables para cada acción, incumpliendo parcialmente el estándar 4.2. Se recomienda reformularlo con metodología de seguimiento.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 13 Ene 2025</span>
+              <span>🔗 Est. 4.2 · Ciclo A</span>
+              <span>👤 Ricardo Vargas</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPORTUNIDAD -->
+        <div class="hallazgo-card hc-oportunidad" data-tipo="oportunidad">
+          <div class="hc-type">🔵 Oportunidad de mejora — Est. 2.2</div>
+          <div class="hc-title">Ampliar cobertura del plan de capacitación SST</div>
+          <div class="hc-desc">Solo el 36% de los trabajadores ha recibido capacitación en SST. Se recomienda implementar un cronograma acelerado para cubrir al 100% del personal antes del próximo trimestre, priorizando trabajadores de riesgo IV y V.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 14 Ene 2025</span>
+              <span>🔗 Est. 2.2 · Ciclo H</span>
+              <span>👤 Ricardo Vargas</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORTALEZA -->
+        <div class="hallazgo-card hc-fortaleza" data-tipo="fortaleza">
+          <div class="hc-type">🟢 Fortaleza del sistema — Est. 2.6</div>
+          <div class="hc-title">Matriz de identificación de peligros y valoración de riesgos completa y actualizada</div>
+          <div class="hc-desc">La empresa cuenta con una matriz GTC-45 completa, actualizada a diciembre de 2024, con identificación de 47 peligros, valoración cuantitativa y controles definidos por jerarquía. Constituye una práctica ejemplar que puede ser referente para otras empresas del sector.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 14 Ene 2025</span>
+              <span>🔗 Est. 2.6 · Ciclo H</span>
+              <span>👤 Ricardo Vargas</span>
+              <span>⭐ Práctica ejemplar</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hallazgo-card hc-fortaleza" data-tipo="fortaleza">
+          <div class="hc-type">🟢 Fortaleza del sistema — Est. 2.8</div>
+          <div class="hc-title">Exámenes médicos ocupacionales al 100% del personal</div>
+          <div class="hc-desc">El 100% de los trabajadores tiene exámenes médicos de ingreso, periódico y de retiro al día, con contrato vigente con IPS habilitada. Esta práctica excede los mínimos requeridos y refleja compromiso real de la alta dirección con la salud de los trabajadores.</div>
+          <div class="hc-footer">
+            <div class="hc-meta">
+              <span>📅 14 Ene 2025</span>
+              <span>🔗 Est. 2.8 · Ciclo H</span>
+              <span>👤 Ricardo Vargas</span>
+            </div>
+            <div class="hc-actions">
+              <button class="btn btn-ghost btn-xs">✏️ Editar</button>
+              <button class="btn btn-danger btn-xs">🗑 Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 6: INFORME FINAL DE AUDITORÍA
+    ════════════════════════════════════════ -->
+    <div id="view-informe" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Informe Final de Auditoría</div>
+          <div class="page-subtitle">SG-SST · Constructora Andina S.A.S. · Generado por Ricardo Vargas · Ene 2025</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📄 Exportar PDF</button>
+          <button class="btn btn-primary btn-sm">📨 Enviar a empresa</button>
+        </div>
+      </div>
+
+      <div class="g64">
+        <div class="flex-col-md">
+
+          <!-- Encabezado informe -->
+          <div class="card" class="border-top-purple">
+            <div class="flex-between-start mb-16">
+              <div>
+                <div class="label-section text-purple">Informe de Auditoría Interna SG-SST</div>
+                <div class="big-num big-num--dark-lg">Res. 0312 / 2019 — Capítulo II</div>
+              </div>
+              <span class="badge b-orange">BORRADOR</span>
+            </div>
+            <div class="g2" class="mb-0">
+              <div class="ib-row"><div class="ib-key">Empresa auditada</div><div class="ib-val">Constructora Andina S.A.S.</div></div>
+              <div class="ib-row"><div class="ib-key">NIT</div><div class="ib-val">900.234.567-3</div></div>
+              <div class="ib-row"><div class="ib-key">Auditor</div><div class="ib-val">Ricardo Vargas</div></div>
+              <div class="ib-row"><div class="ib-key">Fecha auditoría</div><div class="ib-val">10–14 Ene 2025</div></div>
+              <div class="ib-row"><div class="ib-key">Capítulo aplicable</div><div class="ib-val">Capítulo II (11–50 trabajadores)</div></div>
+              <div class="ib-row"><div class="ib-key">Nivel de riesgo</div><div class="ib-val">IV (Construcción)</div></div>
+            </div>
+          </div>
+
+          <!-- Resumen ejecutivo -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Resumen Ejecutivo</div></div>
+            <div class="informe-block">
+              <div class="ib-title">Puntaje obtenido</div>
+              <div class="ib-row"><div class="ib-key">Puntaje declarado empresa</div><div class="ib-val" class="text-warning">62 / 100 pts</div></div>
+              <div class="ib-row"><div class="ib-key">Calificación</div><div class="ib-val" class="text-warning">Moderadamente aceptable</div></div>
+              <div class="ib-row"><div class="ib-key">Total no conformidades</div><div class="ib-val" class="text-danger">4 (2 mayores + 2 menores)</div></div>
+              <div class="ib-row"><div class="ib-key">Oportunidades de mejora</div><div class="ib-val" class="text-warning">3</div></div>
+              <div class="ib-row"><div class="ib-key">Fortalezas identificadas</div><div class="ib-val" class="text-success">5</div></div>
+              <div class="ib-row"><div class="ib-key">Exposición sancionatoria est.</div><div class="ib-val" class="text-danger">$45.6M COP (Art. 28)</div></div>
+            </div>
+
+            <div class="informe-block">
+              <div class="ib-title">No Conformidades Mayores</div>
+              <div class="ib-row" class="bg-danger-light"><div class="ib-key" class="text-danger">🔴 Est. 2.3</div><div class="ib-val" class="text-danger">COPASST no constituido</div></div>
+              <div class="ib-row" class="bg-danger-light"><div class="ib-key" class="text-danger">🔴 Est. 2.5</div><div class="ib-val" class="text-danger">Sin investigación de AT y EL</div></div>
+            </div>
+
+            <div class="informe-block">
+              <div class="ib-title">No Conformidades Menores</div>
+              <div class="ib-row" class="bg-warning-light"><div class="ib-key" class="text-warning">🟡 Est. 1.4</div><div class="ib-val" class="text-warning">Plan de trabajo sin firma directivo</div></div>
+              <div class="ib-row" class="bg-warning-light"><div class="ib-key" class="text-warning">🟡 Est. 4.2</div><div class="ib-val" class="text-warning">Plan de mejora sin estructura completa</div></div>
+            </div>
+
+            <div class="informe-block">
+              <div class="ib-title">Fortalezas Destacadas</div>
+              <div class="ib-row" class="bg-success-light"><div class="ib-key" class="text-success">🟢 Est. 2.6</div><div class="ib-val" class="text-success">Matriz de riesgos ejemplar</div></div>
+              <div class="ib-row" class="bg-success-light"><div class="ib-key" class="text-success">🟢 Est. 2.8</div><div class="ib-val" class="text-success">100% exámenes médicos al día</div></div>
+            </div>
+          </div>
+
+          <!-- Conclusión y recomendaciones -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Conclusión y Recomendaciones</div></div>
+            <div class="form-group">
+              <div class="form-label">Conclusión general del auditor</div>
+              <textarea class="form-textarea" class="min-h-110" placeholder="Escriba aquí la conclusión final de la auditoría...">La empresa Constructora Andina S.A.S. presenta un Sistema de Gestión SST en proceso de implementación con un puntaje de 62/100 (moderadamente aceptable). Se identificaron dos no conformidades mayores que requieren acción inmediata: la constitución del COPASST y la implementación del procedimiento de investigación de accidentes de trabajo, ambos con alto riesgo sancionatorio bajo el Art. 28.</textarea>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Plan de acción recomendado (fechas sugeridas)</div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Acción</th><th>Responsable</th><th>Plazo sugerido</th><th>Prioridad</th></tr></thead>
+                  <tbody>
+                    <tr><td class="text-sm">Constituir COPASST</td><td class="text-sm">Alta dirección</td><td class="text-sm">Inmediato (15 días)</td><td><span class="badge b-red">Crítica</span></td></tr>
+                    <tr><td class="text-sm">Implementar proc. investigación AT</td><td class="text-sm">Resp. SST</td><td class="text-sm">30 días</td><td><span class="badge b-red">Crítica</span></td></tr>
+                    <tr><td class="text-sm">Firma plan de trabajo anual</td><td class="text-sm">Gerente</td><td class="text-sm">8 días</td><td><span class="badge b-orange">Alta</span></td></tr>
+                    <tr><td class="text-sm">Completar capacitación SST</td><td class="text-sm">Resp. SST</td><td class="text-sm">60 días</td><td><span class="badge b-orange">Media</span></td></tr>
+                    <tr><td class="text-sm">Reformular plan de mejora</td><td class="text-sm">Resp. SST</td><td class="text-sm">45 días</td><td><span class="badge b-orange">Media</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex-actions">
+              <button class="btn btn-ghost btn-sm">💾 Guardar borrador</button>
+              <button class="btn btn-primary btn-sm">✅ Finalizar y enviar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar informe -->
+        <div class="flex-col-md">
+          <div class="card">
+            <div class="card-header"><div class="card-title">Estado del Informe</div></div>
+            <div class="timeline">
+              <div class="tl-item"><div class="tl-dot tl-dot-green"></div><div class="tl-time">10 Ene · 09:00</div><div class="tl-text">Inicio de auditoría</div></div>
+              <div class="tl-item"><div class="tl-dot tl-dot-blue"></div><div class="tl-time">10–12 Ene</div><div class="tl-text">Revisión de evidencias</div></div>
+              <div class="tl-item"><div class="tl-dot tl-dot-red"></div><div class="tl-time">13 Ene</div><div class="tl-text">Registro de 4 hallazgos</div></div>
+              <div class="tl-item"><div class="tl-dot tl-dot-orange"></div><div class="tl-time">14 Ene · Actual</div><div class="tl-text">Redacción informe final</div></div>
+              <div class="tl-item" class="opacity-40"><div class="tl-dot" class="dot-gray"></div><div class="tl-time">Pendiente</div><div class="tl-text">Envío a empresa y dirección</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Semáforo de Auditoría</div></div>
+            <div class="stat-card-danger stat-card-danger--border">
+              <div class="emoji-xl mb-6">🔴</div>
+              <div class="big-num big-num--red-xl">ACCIÓN REQUERIDA</div>
+              <div class="text-sm fw-bold text-danger mt-4">2 no conformidades mayores<br>requieren acción inmediata</div>
+            </div>
+            <div class="mt-12 text-xs fw-bold text-muted lh-relaxed">
+              📌 El resultado será informado a la Alta Dirección. La empresa tendrá plazo para presentar plan de mejora según la normativa vigente.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Firma del Auditor</div></div>
+            <div class="empty-state">
+              <div class="emoji-lg mb-8">✍️</div>
+              <div class="text-base fw-bold text-muted">Firma electrónica pendiente</div>
+              <button class="btn btn-primary btn-sm" class="mt-12">Firmar informe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 7: HISTORIAL DE AUDITORÍAS
+    ════════════════════════════════════════ -->
+    <div id="view-historial" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Historial de Auditorías</div>
+          <div class="page-subtitle">Registro histórico de auditorías realizadas a Constructora Andina S.A.S.</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm">📥 Exportar historial</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Auditorías registradas en el sistema</div><div class="card-sub">Comparativo de evolución del SG-SST</div></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Período</th><th>Auditor</th><th>Capítulo</th><th>Puntaje</th><th>Calificación</th><th>No conf. mayores</th><th>No conf. menores</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+              <tr class="bg-info-light">
+                <td class="fw-black">Ene 2025 🔄</td>
+                <td class="text-base">Ricardo Vargas</td>
+                <td><span class="badge b-blue">Cap. II</span></td>
+                <td class="big-num big-num--orange-xl">62</td>
+                <td><span class="badge b-orange">Moderado</span></td>
+                <td class="big-num big-num--red-md">2</td>
+                <td class="big-num big-num--orange-md">2</td>
+                <td><span class="badge b-orange">En curso</span></td>
+                <td><button class="btn btn-ghost btn-xs">Ver</button></td>
+              </tr>
+              <tr>
+                <td class="fw-black">Jun 2024</td>
+                <td class="text-base">Ana Corredor</td>
+                <td><span class="badge b-blue">Cap. II</span></td>
+                <td class="big-num big-num--orange-xl">57</td>
+                <td><span class="badge b-red">Crítico</span></td>
+                <td class="big-num big-num--red-md">4</td>
+                <td class="big-num big-num--orange-md">3</td>
+                <td><span class="badge b-green">Finalizada</span></td>
+                <td><button class="btn btn-ghost btn-xs">Ver</button></td>
+              </tr>
+              <tr>
+                <td class="fw-black">Ene 2024</td>
+                <td class="text-base">Ricardo Vargas</td>
+                <td><span class="badge b-blue">Cap. II</span></td>
+                <td class="big-num big-num--red-xl">41</td>
+                <td><span class="badge b-red">Crítico</span></td>
+                <td class="big-num big-num--red-md">6</td>
+                <td class="big-num big-num--orange-md">4</td>
+                <td><span class="badge b-green">Finalizada</span></td>
+                <td><button class="btn btn-ghost btn-xs">Ver</button></td>
+              </tr>
+              <tr>
+                <td class="fw-black">Jun 2023</td>
+                <td class="text-base">Carlos Nieto</td>
+                <td><span class="badge b-blue">Cap. II</span></td>
+                <td class="big-num big-num--red-xl">35</td>
+                <td><span class="badge b-red">Crítico</span></td>
+                <td class="big-num big-num--red-md">8</td>
+                <td class="big-num big-num--orange-md">5</td>
+                <td><span class="badge b-green">Finalizada</span></td>
+                <td><button class="btn btn-ghost btn-xs">Ver</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Gráfico de tendencia simple -->
+        <div class="section-divider">
+          <div class="text-base fw-black text-dark mb-12">📈 Tendencia de puntaje SG-SST</div>
+          <div class="bar-chart-row">
+            <div class="flex-stat-col">
+              <div class="text-xs fw-black text-danger">35</div>
+              <div class="bar-full bar-full--red" class="animbar" style="height:28%"></div>
+              <div class="text-xxs fw-bold text-muted">Jun 23</div>
+            </div>
+            <div class="flex-stat-col">
+              <div class="text-xs fw-black text-danger">41</div>
+              <div class="bar-full bar-full--h33"></div>
+              <div class="text-xxs fw-bold text-muted">Ene 24</div>
+            </div>
+            <div class="flex-stat-col">
+              <div class="text-xs fw-black text-warning">57</div>
+              <div class="bar-full bar-full--h46"></div>
+              <div class="text-xxs fw-bold text-muted">Jun 24</div>
+            </div>
+            <div class="flex-stat-col">
+              <div class="text-xs fw-black text-purple">62 🔄</div>
+              <div class="bar-full bar-full--h50"></div>
+              <div class="text-xxs fw-bold text-purple">Ene 25</div>
+            </div>
+          </div>
+          <div class="text-sm fw-bold text-success mt-10 text-center">↑ Mejora de 27 puntos en 18 meses — Tendencia positiva</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<!-- ═══════════════ MODAL NUEVO HALLAZGO ═══════════════ -->
+<div class="modal-overlay" id="modal-hallazgo">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Registrar Nuevo Hallazgo</div>
+      <button class="modal-close" onclick="document.getElementById('modal-hallazgo').classList.remove('open')">✕</button>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Tipo de hallazgo *</div>
+      <div class="radio-group">
+        <label class="radio-opt" id="ro-mayor" onclick="selectTipo('mayor')"><input type="radio" name="tipo" value="mayor"> 🔴 No conf. mayor</label>
+        <label class="radio-opt" id="ro-menor" onclick="selectTipo('menor')"><input type="radio" name="tipo" value="menor"> 🟡 No conf. menor</label>
+        <label class="radio-opt" id="ro-oportunidad" onclick="selectTipo('oportunidad')"><input type="radio" name="tipo" value="oportunidad"> 🔵 Oportunidad</label>
+        <label class="radio-opt" id="ro-fortaleza" onclick="selectTipo('fortaleza')"><input type="radio" name="tipo" value="fortaleza"> 🟢 Fortaleza</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Estándar relacionado *</div>
+      <select class="form-input form-select">
+        <option value="">— Seleccionar estándar —</option>
+        <optgroup label="PLANEAR">
+          <option>1.1 — Recursos financieros, técnicos y humanos</option>
+          <option>1.2 — Política SST firmada y comunicada</option>
+          <option>1.3 — Evaluación inicial del SG-SST</option>
+          <option>1.4 — Plan de trabajo anual</option>
+        </optgroup>
+        <optgroup label="HACER">
+          <option>2.1 — Afiliación al SGSS Integral</option>
+          <option>2.2 — Capacitación SST</option>
+          <option>2.3 — COPASST</option>
+          <option>2.4 — Comité de Convivencia</option>
+          <option>2.5 — Investigación AT y EL</option>
+          <option>2.6 — Identificación de peligros y riesgos</option>
+          <option>2.7 — Medidas de prevención y control</option>
+          <option>2.8 — Exámenes médicos ocupacionales</option>
+          <option>2.9 — Registros y estadísticas</option>
+        </optgroup>
+        <optgroup label="VERIFICAR">
+          <option>3.1 — Auditoría anual SG-SST</option>
+          <option>3.2 — Revisión por alta dirección</option>
+        </optgroup>
+        <optgroup label="ACTUAR">
+          <option>4.1 — Acciones preventivas y correctivas</option>
+          <option>4.2 — Plan de mejora</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Título del hallazgo *</div>
+      <input type="text" class="form-input" placeholder="Ej: COPASST no conformado formalmente"/>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Descripción detallada *</div>
+      <textarea class="form-textarea" class="min-h-100" placeholder="Describa el hallazgo con evidencias observadas, referencia normativa y potencial impacto..."></textarea>
+    </div>
+
+    <div class="grid-2-sm">
+      <div class="form-group">
+        <div class="form-label">Artículo / Norma referenciada</div>
+        <input type="text" class="form-input" placeholder="Ej: Art. 28 Ley 1562"/>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Riesgo sancionatorio estimado</div>
+        <input type="text" class="form-input" placeholder="Ej: Hasta $22.8M COP"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-label">Recomendación o acción correctiva sugerida</div>
+      <textarea class="form-textarea" placeholder="Escriba su recomendación para corregir o mejorar este hallazgo..."></textarea>
+    </div>
+
+    <div class="flex-actions-sm">
+      <button class="btn btn-ghost" onclick="document.getElementById('modal-hallazgo').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarHallazgo()">✅ Guardar hallazgo</button>
+    </div>
+  </div>
+</div>
+
+  <script src="js/auditor.js" defer></script>
+</body>
+</html>

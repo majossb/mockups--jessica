@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FOSST — Alta Dirección</title>
+<link rel="stylesheet" href="css/altadireccion.css" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="logo-row">
+      <div class="logo-img"><img src="data:image/png;base64,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" alt="Logo"/></div>
+      <div class="logo-text">
+        <div class="logo-name">Fosst<em></em></div>
+        <div class="logo-sub">Res. 0312 · 2019</div>
+      </div>
+    </div>
+    <div class="empresa-chip">
+      <div class="ec-name">Constructora Andina S.A.S.</div>
+      <div class="ec-meta">NIT 900.234.567-3 · 38 trabajadores · Riesgo III</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Panel Ejecutivo</div>
+      <a class="nav-item active" onclick="showView('v-dashboard')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard General
+      </a>
+      <a class="nav-item" onclick="showView('v-cumplimiento')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Cumplimiento SG-SST
+      </a>
+      <a class="nav-item" onclick="showView('v-sanciones')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Riesgos y Sanciones
+        <span class="ni-badge">!</span>
+      </a>
+      <a class="nav-item" onclick="showView('v-plan')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Plan de Mejora
+        <span class="ni-badge ni-badge-warn">3</span>
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Reportes</div>
+      <a class="nav-item" onclick="showView('v-informes')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        Informes Ejecutivos
+      </a>
+      <a class="nav-item" onclick="showView('v-historial')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Historial Anual
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Configuración</div>
+      <a class="nav-item">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        Configuración empresa
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="user-av">CM</div>
+      <div class="user-info">
+        <div class="user-name">Carlos Mendoza</div>
+        <div class="user-role">Alta Dirección · Gerente</div>
+      </div>
+      <svg class="user-logout" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-breadcrumb">
+        <span class="tb-bc-item">DiagnostiSST</span>
+        <span class="tb-bc-sep">›</span>
+        <span class="tb-bc-active" id="breadcrumb-current">Dashboard General</span>
+      </div>
+    </div>
+    <div class="tb-right">
+      <span class="cap-chip">CAP. II · 21 ESTÁNDARES</span>
+      <button class="tb-btn tb-btn-ghost">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Exportar
+      </button>
+      <button class="tb-btn tb-btn-primary">Ver plan de mejora →</button>
+      <div class="tb-notif">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════ VIEW: DASHBOARD GENERAL ════ -->
+    <div id="v-dashboard" class="view active">
+      <div class="page-header">
+        <div class="page-title">Panel Ejecutivo — Alta Dirección</div>
+        <div class="page-subtitle">Visión financiera, cumplimiento SG-SST y riesgo legal · Constructora Andina S.A.S. · 2025</div>
+      </div>
+
+      <!-- Alerta crítica -->
+      <div class="alert-banner ab-danger">
+        <div class="ab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+        <div class="ab-body">
+          <div class="ab-title">⚠ RIESGO SANCIÓN ACTIVO — Incumplimiento en 5 estándares críticos (Art. 28 · Decreto 1072/2015)</div>
+          <div class="ab-desc">La empresa está expuesta a multas de hasta <strong>$652.000.000 COP (500 SMMLV)</strong>. El COPASST no está constituido y no existe protocolo de investigación de AT/EL. Acción inmediata requerida.</div>
+        </div>
+        <div class="ab-action">
+          <button class="tb-btn tb-btn-primary" onclick="showView('v-sanciones')" class="nowrap">Ver exposición legal →</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi orange">
+          <div class="kpi-bg"></div>
+          <div class="kpi-label">Cumplimiento Global SG-SST</div>
+          <div class="kpi-val">62%</div>
+          <div class="kpi-trend trend-up">↑ +8% vs trimestre anterior</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-bg"></div>
+          <div class="kpi-label">Sanción potencial máxima</div>
+          <div class="kpi-val">$652M</div>
+          <div class="kpi-trend trend-down">↓ 500 SMMLV — Art. 28</div>
+        </div>
+        <div class="kpi green">
+          <div class="kpi-bg"></div>
+          <div class="kpi-label">Multas evitadas (estimado)</div>
+          <div class="kpi-val">$284M</div>
+          <div class="kpi-trend trend-up">↑ Por el avance actual del 62%</div>
+        </div>
+        <div class="kpi blue">
+          <div class="kpi-bg"></div>
+          <div class="kpi-label">Estándares Cumplidos</div>
+          <div class="kpi-val">13/21</div>
+          <div class="kpi-trend trend-neutral">→ 8 pendientes de cierre</div>
+        </div>
+      </div>
+
+      <div class="g64">
+        <!-- Izquierda: PHVA + gráfico -->
+        <div class="flex-col-lg">
+          <!-- PHVA -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Cumplimiento por Ciclo PHVA</div><div class="card-sub">Res. 0312/2019 · Capítulo II</div></div>
+              <button class="card-action" onclick="showView('v-cumplimiento')">Ver detalle →</button>
+            </div>
+            <div class="phva-grid">
+              <div class="phva-box phva-p">
+                <div class="phva-letter">P</div>
+                <div class="phva-name">Planear</div>
+                <div class="phva-pct">78%</div>
+                <div class="phva-bar"><div class="phva-fill" style="width:78%;"></div></div>
+              </div>
+              <div class="phva-box phva-h">
+                <div class="phva-letter">H</div>
+                <div class="phva-name">Hacer</div>
+                <div class="phva-pct">55%</div>
+                <div class="phva-bar"><div class="phva-fill" style="width:55%;"></div></div>
+              </div>
+              <div class="phva-box phva-v">
+                <div class="phva-letter">V</div>
+                <div class="phva-name">Verificar</div>
+                <div class="phva-pct">40%</div>
+                <div class="phva-bar"><div class="phva-fill" style="width:40%;"></div></div>
+              </div>
+              <div class="phva-box phva-a">
+                <div class="phva-letter">A</div>
+                <div class="phva-name">Actuar</div>
+                <div class="phva-pct">25%</div>
+                <div class="phva-bar"><div class="phva-fill" style="width:25%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráfico histórico -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Evolución del Cumplimiento</div><div class="card-sub">Últimos 6 meses</div></div>
+            </div>
+            <div class="chart-bars">
+              <div class="bar-col">
+                <div class="bar-body pf-red" class="bar-col bar-col--h30"><span class="bar-val">30%</span></div>
+                <div class="bar-label">Ago</div>
+              </div>
+              <div class="bar-col">
+                <div class="bar-body" class="bar-col bar-col--h35"><span class="bar-val">35%</span></div>
+                <div class="bar-label">Sep</div>
+              </div>
+              <div class="bar-col">
+                <div class="bar-body" class="bar-col bar-col--h42"><span class="bar-val">42%</span></div>
+                <div class="bar-label">Oct</div>
+              </div>
+              <div class="bar-col">
+                <div class="bar-body" class="bar-col bar-col--h50"><span class="bar-val">50%</span></div>
+                <div class="bar-label">Nov</div>
+              </div>
+              <div class="bar-col">
+                <div class="bar-body" class="bar-col bar-col--h57"><span class="bar-val">57%</span></div>
+                <div class="bar-label">Dic</div>
+              </div>
+              <div class="bar-col">
+                <div class="bar-body" class="bar-col bar-col--h62"><span class="bar-val">62%</span></div>
+                <div class="bar-label" class="text-info fw-black">Ene 25</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Derecha: gauge + alertas -->
+        <div class="flex-col-lg">
+          <!-- Gauge -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Índice Global</div></div>
+            </div>
+            <div class="gauge-outer">
+              <svg class="gauge-svg" viewBox="0 0 200 110">
+                <path d="M24 95 A76 76 0 0 1 176 95" fill="none" stroke="#E8EDF5" stroke-width="18" stroke-linecap="round"/>
+                <path d="M24 95 A76 76 0 0 1 176 95" fill="none" stroke="url(#g1)" stroke-width="18" stroke-linecap="round" stroke-dasharray="239" stroke-dashoffset="91"/>
+                <defs>
+                  <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#F5820D"/>
+                    <stop offset="100%" stop-color="#FF9F35"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="gauge-number" class="mt-neg-16">62%</div>
+              <div class="gauge-desc">de 100 puntos posibles (21 estándares)</div>
+              <span class="gauge-chip gc-moderado">⚡ MODERADAMENTE ACEPTABLE</span>
+              <div class="gauge-benchmarks">
+                <div class="gb-item"><div class="gb-label">Mínimo</div><div class="gb-val" class="text-danger">60%</div></div>
+                <div class="gb-item"><div class="gb-label">Actual</div><div class="gb-val" class="text-naranja">62%</div></div>
+                <div class="gb-item"><div class="gb-label">Meta</div><div class="gb-val" class="text-success">85%</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capítulo -->
+          <div class="cap-card">
+            <div class="cap-label">Clasificación Res. 0312</div>
+            <div class="cap-chapter">Cap. II</div>
+            <div class="cap-name">Empresa mediana · 38 trabajadores</div>
+            <div class="cap-desc">11–50 trabajadores · Clase de riesgo III · 21 estándares mínimos obligatorios</div>
+            <div class="cap-stats">
+              <div class="cs-item"><div class="cs-val">21</div><div class="cs-lab">Estándares</div></div>
+              <div class="cs-item"><div class="cs-val">60%</div><div class="cs-lab">Mínimo</div></div>
+              <div class="cs-item"><div class="cs-val">100</div><div class="cs-lab">Pts totales</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas críticas + tabla ejecutiva -->
+      <div class="g2">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Alertas Críticas del Sistema</div><div class="card-sub">Estándares que generan exposición legal</div></div>
+          </div>
+          <div class="alert-list">
+            <div class="al-item al-danger">
+              <div class="al-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="al-body">
+                <div class="al-title">COPASST no constituido — Est. 2.3</div>
+                <div class="al-desc">El Comité Paritario de SST no ha sido conformado. Multa hasta $104M. Vence plazo en 15 días.</div>
+                <div class="al-date">Sin fecha de acción</div>
+              </div>
+            </div>
+            <div class="al-item al-danger">
+              <div class="al-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="al-body">
+                <div class="al-title">Sin protocolo de investigación AT/EL — Est. 2.5</div>
+                <div class="al-desc">No existe procedimiento para investigar accidentes de trabajo. Exposición máxima: $130M.</div>
+                <div class="al-date">Sin fecha de acción</div>
+              </div>
+            </div>
+            <div class="al-item al-warning">
+              <div class="al-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+              <div class="al-body">
+                <div class="al-title">Capacitaciones incompletas — Est. 2.2</div>
+                <div class="al-desc">16 de 38 trabajadores sin inducción SST. Riesgo moderado. Plan de acción: 30 días.</div>
+                <div class="al-date">Plazo: 15 Feb 2025</div>
+              </div>
+            </div>
+            <div class="al-item al-warning">
+              <div class="al-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+              <div class="al-body">
+                <div class="al-title">Plan de trabajo sin firmar — Est. 1.4</div>
+                <div class="al-desc">El plan anual fue elaborado pero el empleador no lo ha firmado. Obligatorio Art. 8.</div>
+                <div class="al-date">Plazo: 28 Ene 2025</div>
+              </div>
+            </div>
+            <div class="al-item al-info">
+              <div class="al-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg></div>
+              <div class="al-body">
+                <div class="al-title">Revisión por dirección pendiente — Est. 3.1</div>
+                <div class="al-desc">La revisión anual por la alta dirección no se ha realizado. Obligatoria mínimo 1 vez/año.</div>
+                <div class="al-date">Plazo: 28 Feb 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla resumen estándares por estado -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Resumen Ejecutivo de Estándares</div></div>
+            <button class="card-action" onclick="showView('v-cumplimiento')">Ver todos →</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Ciclo</th><th>Estándar</th><th>Pts</th><th>Estado</th><th>Riesgo $</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-blue">P</span></td>
+                  <td class="td-bold" class="text-sm">Recursos y asignación</td>
+                  <td class="td-num" class="text-naranja">4</td>
+                  <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                  <td class="text-sm fw-black text-success">Bajo</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-blue">P</span></td>
+                  <td class="td-bold" class="text-sm">Política SST firmada</td>
+                  <td class="td-num" class="text-naranja">1</td>
+                  <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                  <td class="text-sm fw-black text-success">Bajo</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="td-bold" class="text-sm text-warning">Capacitación SST</td>
+                  <td class="td-num" class="text-naranja">2</td>
+                  <td><span class="badge badge-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td class="text-sm fw-black text-warning">$78M</td>
+                </tr>
+                <tr class="bg-danger">
+                  <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="td-bold" class="text-sm text-danger">⚠ COPASST</td>
+                  <td class="td-num" class="text-naranja">0.5</td>
+                  <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                  <td class="text-sm fw-black text-danger">$104M</td>
+                </tr>
+                <tr class="bg-danger">
+                  <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                  <td class="td-bold" class="text-sm text-danger">⚠ Investig. AT/EL</td>
+                  <td class="td-num" class="text-naranja">5</td>
+                  <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                  <td class="text-sm fw-black text-danger">$130M</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-green" class="bg-success text-success">V</span></td>
+                  <td class="td-bold" class="text-sm">Revisión dirección</td>
+                  <td class="td-num" class="text-naranja">4</td>
+                  <td><span class="badge badge-orange"><span class="bdot"></span>En proceso</span></td>
+                  <td class="text-sm fw-black text-warning">$52M</td>
+                </tr>
+                <tr class="bg-danger">
+                  <td><span class="badge badge-red" class="bg-danger-light">A</span></td>
+                  <td class="td-bold" class="text-sm text-danger">⚠ Acciones correctivas</td>
+                  <td class="td-num" class="text-naranja">10</td>
+                  <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                  <td class="text-sm fw-black text-danger">$130M</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: SANCIONES ════ -->
+    <div id="v-sanciones" class="view" class="view">
+      <div class="page-header">
+        <div class="page-title">Riesgos Legales y Sanciones</div>
+        <div class="page-subtitle">Exposición económica por incumplimiento · Art. 28 Decreto 1072/2015 · Ley 1562/2012</div>
+      </div>
+
+      <!-- KPIs sanciones -->
+      <div class="kpi-grid">
+        <div class="kpi red"><div class="kpi-bg"></div>
+          <div class="kpi-label">Sanción máxima Art. 28</div>
+          <div class="kpi-val">$652M</div>
+          <div class="kpi-trend trend-down">↓ 500 SMMLV × $1.300.000</div>
+        </div>
+        <div class="kpi red"><div class="kpi-bg"></div>
+          <div class="kpi-label">Exposición actual estimada</div>
+          <div class="kpi-val">$394M</div>
+          <div class="kpi-trend trend-down">↓ Por 5 incumplimientos activos</div>
+        </div>
+        <div class="kpi orange"><div class="kpi-bg"></div>
+          <div class="kpi-label">Incumplimientos críticos</div>
+          <div class="kpi-val">5</div>
+          <div class="kpi-trend trend-neutral">→ Generan sanciones directas</div>
+        </div>
+        <div class="kpi green"><div class="kpi-bg"></div>
+          <div class="kpi-label">Ahorro con plan de mejora</div>
+          <div class="kpi-val">$312M</div>
+          <div class="kpi-trend trend-up">↑ Cumpliendo los 3 más críticos</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="flex-col-lg">
+          <div class="sancion-box">
+            <div class="sancion-label">Artículo 28 — Decreto 1072/2015</div>
+            <div class="sancion-amount">Hasta 500 SMMLV</div>
+            <div class="sancion-sub">Por incumplimiento de normas SST y riesgos laborales vigentes</div>
+            <div class="sancion-items">
+              <div class="sancion-row"><span class="sancion-key">SMMLV 2025</span><span class="sancion-val">$1.300.000</span></div>
+              <div class="sancion-row"><span class="sancion-key">Máximo en pesos</span><span class="sancion-val">$652.000.000</span></div>
+              <div class="sancion-row"><span class="sancion-key">Exposición actual</span><span class="sancion-val">~$394.000.000</span></div>
+              <div class="sancion-row"><span class="sancion-key">Reducible con 3 acciones</span><span class="sancion-val">-$312.000.000</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Tipos de Sanciones Aplicables</div></div></div>
+            <div class="tipo-sancion">
+              <div class="ts-item grave">
+                <div class="ts-icon">💰</div>
+                <div class="ts-body">
+                  <div class="ts-title">Multa económica</div>
+                  <div class="ts-desc">Sanción principal por incumplimiento de normas SST. Gradual según gravedad.</div>
+                  <div class="ts-monto">Hasta 500 SMMLV ($652M)</div>
+                </div>
+              </div>
+              <div class="ts-item moderado">
+                <div class="ts-icon">🚫</div>
+                <div class="ts-body">
+                  <div class="ts-title">Cierre temporal del establecimiento</div>
+                  <div class="ts-desc">Por riesgo grave inminente que amenace la vida o integridad de los trabajadores.</div>
+                  <div class="ts-monto">Hasta 120 días calendario</div>
+                </div>
+              </div>
+              <div class="ts-item grave">
+                <div class="ts-icon">⛔</div>
+                <div class="ts-body">
+                  <div class="ts-title">Cierre definitivo de la empresa</div>
+                  <div class="ts-desc">Cuando el empleador no corrija la situación que generó el cierre temporal.</div>
+                  <div class="ts-monto">Resolución motivada Ministerio del Trabajo</div>
+                </div>
+              </div>
+              <div class="ts-item leve">
+                <div class="ts-icon">📋</div>
+                <div class="ts-body">
+                  <div class="ts-title">Investigación administrativa</div>
+                  <div class="ts-desc">Proceso iniciado por el Ministerio del Trabajo que puede derivar en multas.</div>
+                  <div class="ts-monto">Sin monto fijo — Dependiendo resultado</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla por incumplimiento -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Exposición por Estándar Incumplido</div><div class="card-sub">Sanciones estimadas según gravedad</div></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Estándar</th><th>Gravedad</th><th>Sanción estimada</th><th>Norma</th></tr></thead>
+              <tbody>
+                <tr class="bg-danger">
+                  <td><div class="text-sm fw-black text-danger">Investigación AT y EL</div><div class="text-xs text-muted">Est. 2.5 · 5 pts</div></td>
+                  <td><span class="badge badge-red">Grave</span></td>
+                  <td><div class="big-num big-num--red">Hasta $130M</div><div class="text-xs text-muted">~100 SMMLV</div></td>
+                  <td><span class="pill-gray">Art. 28</span></td>
+                </tr>
+                <tr class="bg-danger">
+                  <td><div class="text-sm fw-black text-danger">COPASST no activo</div><div class="text-xs text-muted">Est. 2.3 · 0.5 pts</div></td>
+                  <td><span class="badge badge-red">Grave</span></td>
+                  <td><div class="big-num big-num--red">Hasta $104M</div><div class="text-xs text-muted">~80 SMMLV</div></td>
+                  <td><span class="pill-gray">Art. 28</span></td>
+                </tr>
+                <tr class="bg-danger">
+                  <td><div class="text-sm fw-black text-danger">Sin acciones correctivas</div><div class="text-xs text-muted">Est. 4.1 · 10 pts</div></td>
+                  <td><span class="badge badge-red">Grave</span></td>
+                  <td><div class="big-num big-num--red">Hasta $130M</div><div class="text-xs text-muted">~100 SMMLV</div></td>
+                  <td><span class="pill-gray">Art. 28</span></td>
+                </tr>
+                <tr>
+                  <td><div class="text-sm fw-black text-warning">Capacitaciones incompletas</div><div class="text-xs text-muted">Est. 2.2 · 2 pts</div></td>
+                  <td><span class="badge badge-orange">Moderado</span></td>
+                  <td><div class="big-num big-num--orange">Hasta $78M</div><div class="text-xs text-muted">~60 SMMLV</div></td>
+                  <td><span class="pill-gray">Art. 28</span></td>
+                </tr>
+                <tr>
+                  <td><div class="text-sm fw-black text-warning">Plan trabajo sin firmar</div><div class="text-xs text-muted">Est. 1.4 · 2 pts</div></td>
+                  <td><span class="badge badge-orange">Moderado</span></td>
+                  <td><div class="big-num big-num--orange">Hasta $52M</div><div class="text-xs text-muted">~40 SMMLV</div></td>
+                  <td><span class="pill-gray">Art. 28</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-block">
+            <div class="text-sm fw-black text-dark mb-6">Resumen de Impacto Financiero</div>
+            <div class="flex-between">
+              <div>
+                <div class="text-xs fw-bold text-muted">Total exposición actual</div>
+                <div class="big-num big-num--red-lg">$494.000.000</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xs fw-bold text-muted">Reducible en 30 días</div>
+                <div class="big-num big-num--naranja-lg">-$312.000.000</div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs fw-bold text-muted">Exposición residual</div>
+                <div class="big-num big-num--orange-lg">$182.000.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: CUMPLIMIENTO ════ -->
+    <div id="v-cumplimiento" class="view" class="view">
+      <div class="page-header">
+        <div class="page-title">Cumplimiento SG-SST — Vista Ejecutiva</div>
+        <div class="page-subtitle">Estado de los 21 estándares mínimos · Capítulo II · Res. 0312/2019</div>
+      </div>
+      <div class="card" class="mb-20">
+        <div class="card-header">
+          <div><div class="card-title">Progreso por Estándar</div></div>
+          <div class="flex-gap">
+            <span class="badge badge-green">✅ Cumple: 13</span>
+            <span class="badge badge-red">❌ No cumple: 5</span>
+            <span class="badge badge-orange">⏳ En proceso: 3</span>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div class="phva-label phva-planear">PLANEAR — 78% cumplimiento</div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">1.1 Recursos financieros y técnicos</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">1.2 Política SST firmada</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">1.3 Objetivos SG-SST documentados</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">1.4 Plan de trabajo anual</div><div class="prog-pct" class="text-warning">70%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:70%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">1.5 Responsable SST definido</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="phva-label phva-hacer">HACER — 55% cumplimiento</div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.1 Afiliación ARL y Seguridad Social</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">2.2 Capacitación SST</div><div class="prog-pct" class="text-warning">60%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:60%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 2.3 COPASST o Vigía SST</div><div class="prog-pct" class="text-danger">10%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:10%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 2.4 Programa de autocuidado</div><div class="prog-pct" class="text-danger">0%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:2%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 2.5 Investigación AT y EL</div><div class="prog-pct" class="text-danger">0%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:2%;"></div></div></div>
+          </div>
+          <div>
+            <div class="phva-label phva-planear">— continuación HACER</div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.6 Identificación peligros (GTC-45)</div><div class="prog-pct" class="text-info">45%</div></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:45%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.7 Medidas de prevención y control</div><div class="prog-pct" class="text-info">40%</div></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:40%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.8 Exámenes médicos ocupacionales</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.9 Gestión de cambios</div><div class="prog-pct" class="text-success">80%</div></div><div class="prog-bar"><div class="prog-fill pf-green" style="width:80%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">2.10 Contratistas y proveedores SST</div><div class="prog-pct" class="text-success">75%</div></div><div class="prog-bar"><div class="prog-fill pf-green" style="width:75%;"></div></div></div>
+            <div class="phva-label phva-verificar">VERIFICAR — 40% cumplimiento</div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">3.1 Revisión por alta dirección</div><div class="prog-pct" class="text-warning">35%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:35%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">3.2 Auditoría anual SG-SST</div><div class="prog-pct" class="text-info">50%</div></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:50%;"></div></div></div>
+            <div class="phva-label phva-actuar">ACTUAR — 25% cumplimiento</div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 4.1 Acciones preventivas y correctivas</div><div class="prog-pct" class="text-danger">0%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:2%;"></div></div></div>
+            <div class="prog-item"><div class="prog-header"><div class="prog-name">4.2 Mejora continua documentada</div><div class="prog-pct" class="text-info">50%</div></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:50%;"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: PLAN DE MEJORA ════ -->
+    <div id="v-plan" class="view" class="view">
+      <div class="page-header">
+        <div class="page-title">Plan de Mejora — Acciones Prioritarias</div>
+        <div class="page-subtitle">Basado en el análisis de incumplimientos y exposición legal · Generado automáticamente</div>
+      </div>
+      <div class="g2" class="mb-0">
+        <div>
+          <div class="phva-label phva-actuar">🔴 Urgente — Acción Inmediata (0–15 días)</div>
+          <div class="plan-item">
+            <div class="plan-num">1</div>
+            <div class="plan-body">
+              <div class="plan-priority">Acción #1 · CRÍTICA · Est. 2.3</div>
+              <div class="plan-title">Constituir el COPASST o Vigía de SST</div>
+              <div class="plan-desc">Convocar y realizar elección democrática de representantes trabajadores. Elaborar acta de constitución, resolución de conformación y plan de reuniones. Aplica Art. 12 Res. 0312/2019.</div>
+              <div class="plan-footer">
+                <span class="plan-ahorro">Ahorro potencial: $104.000.000</span>
+                <span class="badge badge-red">Plazo: 15 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-num">2</div>
+            <div class="plan-body">
+              <div class="plan-priority">Acción #2 · CRÍTICA · Est. 2.5</div>
+              <div class="plan-title">Elaborar procedimiento de investigación AT y EL</div>
+              <div class="plan-desc">Crear procedimiento escrito para investigar accidentes de trabajo y enfermedades laborales. Definir responsables, plazos, formatos y metodología. Obligatorio Art. 13.</div>
+              <div class="plan-footer">
+                <span class="plan-ahorro">Ahorro potencial: $130.000.000</span>
+                <span class="badge badge-red">Plazo: 15 días</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="phva-label phva-hacer">🟡 Importante — Corto plazo (15–30 días)</div>
+          <div class="plan-item">
+            <div class="plan-num" class="bg-gradient-yellow">3</div>
+            <div class="plan-body">
+              <div class="plan-priority" class="text-warning">Acción #3 · IMPORTANTE · Est. 2.2</div>
+              <div class="plan-title">Completar capacitaciones SST pendientes</div>
+              <div class="plan-desc">Programar y ejecutar inducción SST para los 16 trabajadores restantes. Registrar listas de asistencia con firmas. Incluir temáticas de autocuidado y riesgos específicos de construcción.</div>
+              <div class="plan-footer">
+                <span class="plan-ahorro">Ahorro potencial: $78.000.000</span>
+                <span class="badge badge-orange">Plazo: 30 días</span>
+              </div>
+            </div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-num" class="bg-gradient-yellow">4</div>
+            <div class="plan-body">
+              <div class="plan-priority" class="text-warning">Acción #4 · IMPORTANTE · Est. 1.4</div>
+              <div class="plan-title">Firmar y aprobar plan de trabajo anual</div>
+              <div class="plan-desc">El plan fue elaborado por el responsable SST pero requiere firma y aprobación del empleador. Acción simple: revisar, ajustar si es necesario y firmar formalmente.</div>
+              <div class="plan-footer">
+                <span class="plan-ahorro">Ahorro potencial: $52.000.000</span>
+                <span class="badge badge-orange">Plazo: Esta semana</span>
+              </div>
+            </div>
+          </div>
+          <div class="plan-item">
+            <div class="plan-num" class="bg-gradient-blue">5</div>
+            <div class="plan-body">
+              <div class="plan-priority" class="text-info">Acción #5 · MEDIA · Est. 4.1</div>
+              <div class="plan-title">Implementar sistema de acciones correctivas</div>
+              <div class="plan-desc">Crear formato y procedimiento para registrar, hacer seguimiento y cerrar acciones correctivas y preventivas derivadas de inspecciones, incidentes y no conformidades.</div>
+              <div class="plan-footer">
+                <span class="plan-ahorro">Ahorro potencial: $130.000.000</span>
+                <span class="badge badge-blue">Plazo: 45 días</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: INFORMES ════ -->
+    <div id="v-informes" class="view" class="view">
+      <div class="page-header">
+        <div class="page-title">Informes Ejecutivos</div>
+        <div class="page-subtitle">Descarga y gestión de informes del SG-SST · Constructora Andina S.A.S.</div>
+      </div>
+      <div class="g3" class="mb-0">
+        <div class="card" class="clickable-center" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+          <div class="icon-box icon-box--red icon-box--centered"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="card-title">Informe de Exposición Legal</div>
+          <div class="text-sm text-muted block-hint">Sanciones Art. 28 · Estado actual</div>
+          <button class="tb-btn tb-btn-primary" class="btn-full">📥 Descargar PDF</button>
+        </div>
+        <div class="card" class="clickable-center" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+          <div class="icon-box icon-box--blue icon-box--centered"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--azul-claro)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="card-title">Informe de Cumplimiento</div>
+          <div class="text-sm text-muted block-hint">21 estándares · Puntaje PHVA</div>
+          <button class="tb-btn tb-btn-primary" class="btn-full">📥 Descargar PDF</button>
+        </div>
+        <div class="card" class="clickable-center" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+          <div class="icon-box icon-box--green icon-box--centered"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg></div>
+          <div class="card-title">Plan de Mejora</div>
+          <div class="text-sm text-muted block-hint">Acciones priorizadas · Cronograma</div>
+          <button class="tb-btn tb-btn-primary" class="btn-full">📥 Descargar PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: HISTORIAL ════ -->
+    <div id="v-historial" class="view" class="view">
+      <div class="page-header">
+        <div class="page-title">Historial Anual SG-SST</div>
+        <div class="page-subtitle">Evolución del cumplimiento por año</div>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Año</th><th>Capítulo</th><th>Cumplimiento</th><th>Calificación</th><th>Estándares</th><th>Sanción evitada</th><th>Informe</th></tr></thead>
+            <tbody>
+              <tr class="bg-naranja-soft"><td class="td-bold">2025</td><td><span class="badge badge-blue">Cap. II</span></td><td><span class="big-num big-num--naranja">62%</span></td><td><span class="badge badge-orange">Moderado</span></td><td>13/21</td><td class="text-success fw-black">$284M</td><td><button class="card-action" class="text-xs btn-xs-pad">Ver</button></td></tr>
+              <tr><td class="td-bold">2024</td><td><span class="badge badge-blue">Cap. II</span></td><td><span class="big-num big-num--red">48%</span></td><td><span class="badge badge-red">Crítico</span></td><td>10/21</td><td class="text-danger fw-black">$0 — Sancionado</td><td><button class="card-action" class="text-xs btn-xs-pad">Ver</button></td></tr>
+              <tr><td class="td-bold">2023</td><td><span class="badge badge-blue">Cap. II</span></td><td><span class="big-num big-num--orange">71%</span></td><td><span class="badge badge-orange">Moderado</span></td><td>15/21</td><td class="text-success fw-black">$380M</td><td><button class="card-action" class="text-xs btn-xs-pad">Ver</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+  <script src="js/altadireccion.js" defer></script>
+</body>
+</html>

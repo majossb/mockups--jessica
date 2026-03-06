@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DiagnostiSST — Responsable SG-SST</title>
+<link rel="stylesheet" href="css/responsable.css" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="logo-row">
+      <div class="logo-img"><img src="data:image/png;base64,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" alt="Logo"/></div>
+      <div class="logo-text">
+        <div class="logo-name">Fosst<em></em></div>
+        <div class="logo-sub">Res. 0312 · 2019</div>
+      </div>
+    </div>
+    <div class="empresa-chip">
+      <div class="ec-name">Constructora Andina S.A.S.</div>
+      <div class="ec-meta">NIT 900.234.567-3 · Cap. II · 38 trab.</div>
+    </div>
+    <div class="role-chip">
+      <div class="role-chip-dot"></div>
+      <span class="role-chip-text">Responsable SG-SST</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Mi Trabajo</div>
+      <a class="nav-item" onclick="showView('v-panel')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Mi Panel
+      </a>
+      <a class="nav-item" onclick="showView('v-estandares')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Estándares Mínimos
+        <span class="ni-badge">5</span>
+      </a>
+      <a class="nav-item" onclick="showView('v-autoevaluacion')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+        Autoevaluación Anual
+      </a>
+      <a class="nav-item" onclick="showView('v-evidencias')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Cargar Evidencias
+        <span class="ni-badge" class="bg-naranja">3</span>
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Planificación</div>
+      <a class="nav-item" onclick="showView('v-plan')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Plan de Trabajo
+      </a>
+      <a class="nav-item" onclick="showView('v-capacitaciones')">
+        <svg class="ni-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Capacitaciones
+        <span class="ni-badge" class="bg-amarillo">16</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="user-av">SR</div>
+      <div>
+        <div class="user-name">Sandra Ríos</div>
+        <div class="user-role">Responsable SG-SST</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="tb-left">
+      <span class="tb-bc-item">DiagnostiSST</span>
+      <span class="tb-bc-sep"> › </span>
+      <span class="tb-bc-active" id="bc">Mi Panel</span>
+    </div>
+    <div class="tb-right">
+      <span class="cap-chip">CAP. II · 21 ESTÁNDARES</span>
+      <button class="btn btn-primary btn-sm" onclick="showView('v-evidencias')">+ Cargar evidencia</button>
+      <div class="tb-notif">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="notif-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════ VIEW: MI PANEL ════ -->
+    <div id="v-panel" class="view active">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Mi Panel — Responsable SG-SST</div>
+          <div class="page-subtitle">Gestión y ejecución del SG-SST · Constructora Andina S.A.S. · Enero 2025</div>
+        </div>
+        <button class="btn btn-ghost btn-sm">📥 Exportar avance</button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi blue"><div class="kpi-bg"></div>
+          <div class="kpi-label">Avance global</div>
+          <div class="kpi-val">62%</div>
+          <div class="kpi-trend trend-up">↑ Meta: 85%</div>
+        </div>
+        <div class="kpi green"><div class="kpi-bg"></div>
+          <div class="kpi-label">Cumplidos</div>
+          <div class="kpi-val">13/21</div>
+          <div class="kpi-trend trend-neutral">→ estándares</div>
+        </div>
+        <div class="kpi red"><div class="kpi-bg"></div>
+          <div class="kpi-label">Urgentes hoy</div>
+          <div class="kpi-val">3</div>
+          <div class="kpi-trend trend-down">↓ Acción inmediata</div>
+        </div>
+        <div class="kpi orange"><div class="kpi-bg"></div>
+          <div class="kpi-label">Evidencias cargadas</div>
+          <div class="kpi-val">28</div>
+          <div class="kpi-trend trend-up">↑ +5 esta semana</div>
+        </div>
+      </div>
+
+      <div class="g64">
+        <!-- Progreso por estándar -->
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Avance por Estándar — Capítulo II</div><div class="card-sub">Res. 0312/2019 · 21 estándares mínimos</div></div>
+            <button class="card-action" onclick="showView('v-estandares')">Ver completo →</button>
+          </div>
+
+          <div class="phva-label phva-planear">PLANEAR</div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name">1.1 Recursos financieros y técnicos</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name">1.2 Política SST</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">1.4 Plan de trabajo anual</div><div class="prog-pct" class="text-warning">70%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:70%;"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name">1.5 Responsable SST</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+
+          <div class="phva-label phva-hacer">HACER</div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name">2.1 Afiliación ARL</div><div class="prog-pct" class="text-success">100%</div></div><div class="prog-bar"><div class="prog-fill pf-green" class="w-full"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">2.2 Capacitaciones SST</div><div class="prog-pct" class="text-warning">60%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:60%;"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 2.3 COPASST o Vigía</div><div class="prog-pct" class="text-danger">10%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:10%;"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 2.5 Investigación AT/EL</div><div class="prog-pct" class="text-danger">0%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:2%;"></div></div></div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-info">2.6 Identificación peligros</div><div class="prog-pct" class="text-info">45%</div></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:45%;"></div></div></div>
+
+          <div class="phva-label phva-verificar">VERIFICAR</div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-warning">3.1 Revisión alta dirección</div><div class="prog-pct" class="text-warning">35%</div></div><div class="prog-bar"><div class="prog-fill pf-orange" style="width:35%;"></div></div></div>
+
+          <div class="phva-label phva-actuar">ACTUAR</div>
+          <div class="prog-item"><div class="prog-header"><div class="prog-name" class="text-danger">⚠ 4.1 Acciones correctivas</div><div class="prog-pct" class="text-danger">0%</div></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:2%;"></div></div></div>
+        </div>
+
+        <!-- Panel derecho -->
+        <div class="flex-col-lg">
+          <!-- Tareas urgentes -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">📋 Tareas Urgentes Hoy</div></div>
+            </div>
+            <div class="task-card urgente">
+              <div class="tc-check no"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="tc-body">
+                <div class="tc-code">Est. 2.3</div>
+                <div class="tc-title">Conformar COPASST</div>
+                <div class="tc-footer">
+                  <span class="badge badge-red">Sin fecha</span>
+                  <button class="btn btn-primary btn-sm" onclick="showView('v-estandares')">Ejecutar</button>
+                </div>
+              </div>
+            </div>
+            <div class="task-card urgente">
+              <div class="tc-check no"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="tc-body">
+                <div class="tc-code">Est. 2.5</div>
+                <div class="tc-title">Protocolo investigación AT</div>
+                <div class="tc-footer">
+                  <span class="badge badge-red">Crítico</span>
+                  <button class="btn btn-primary btn-sm" onclick="showView('v-estandares')">Ejecutar</button>
+                </div>
+              </div>
+            </div>
+            <div class="task-card pendiente">
+              <div class="tc-check partial"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+              <div class="tc-body">
+                <div class="tc-code">Est. 1.4</div>
+                <div class="tc-title">Firmar plan de trabajo</div>
+                <div class="tc-footer">
+                  <span class="badge badge-orange">28 Ene</span>
+                  <button class="btn btn-ghost btn-sm" onclick="showView('v-evidencias')">Cargar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Historial de actividad -->
+          <div class="card">
+            <div class="card-header"><div class="card-title">Actividad reciente</div></div>
+            <div class="tl">
+              <div class="tl-item">
+                <div class="tl-dot tl-dot-green"></div>
+                <div class="tl-title">Política SST cargada y aprobada</div>
+                <div class="tl-desc">Documento firmado subido al sistema</div>
+                <div class="tl-date">15 Ene 2025</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot tl-dot-green"></div>
+                <div class="tl-title">Afiliación ARL verificada — 38 trab.</div>
+                <div class="tl-desc">Planilla completa cargada como evidencia</div>
+                <div class="tl-date">10 Ene 2025</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot tl-dot-orange"></div>
+                <div class="tl-title">Capacitación SST parcial</div>
+                <div class="tl-desc">22 de 38 trabajadores capacitados</div>
+                <div class="tl-date">08 Ene 2025</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot tl-dot-gray"></div>
+                <div class="tl-title">Plan de trabajo enviado a dirección</div>
+                <div class="tl-desc">Pendiente firma del empleador</div>
+                <div class="tl-date">02 Ene 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: ESTÁNDARES MÍNIMOS ════ -->
+    <div id="v-estandares" class="view" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Estándares Mínimos — Capítulo II</div>
+          <div class="page-subtitle">21 estándares · Empresas 11–50 trabajadores · Riesgo I, II o III · Res. 0312/2019 Art. 16</div>
+        </div>
+        <div class="flex-gap">
+          <button class="btn btn-ghost btn-sm">🔍 Filtrar</button>
+          <button class="btn btn-primary btn-sm" onclick="showView('v-evidencias')">+ Cargar evidencia</button>
+        </div>
+      </div>
+
+      <!-- Filtros rápidos -->
+      <div class="tag-group">
+        <button class="btn btn-ghost btn-sm" class="btn-ghost-active">Todos (21)</button>
+        <button class="btn btn-ghost btn-sm" class="text-danger">❌ No cumple (5)</button>
+        <button class="btn btn-ghost btn-sm" class="text-warning">⏳ En proceso (3)</button>
+        <button class="btn btn-ghost btn-sm" class="text-success">✅ Cumple (13)</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">Tabla Completa de Estándares · Diligenciamiento directo</div></div>
+          <div class="result-num-sm">62 / 100 pts</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Cód.</th><th>Ciclo</th><th>Estándar Mínimo</th><th>Art.</th><th>Pts</th><th>Estado</th><th>Evidencias</th><th>Obs.</th><th>Acción</th></tr>
+            </thead>
+            <tbody>
+              <!-- PLANEAR -->
+              <tr class="tr-planear"><td colspan="9" class="section-header text-info" >PLANEAR (P) — 25 puntos</td></tr>
+              <tr>
+                <td class="text-sm fw-black">1.1</td>
+                <td><span class="badge badge-blue">P</span></td>
+                <td class="text-base fw-bold">Recursos financieros, técnicos, humanos y de otra índole para implementar el SG-SST</td>
+                <td><span class="pill-gray">Art. 5</span></td>
+                <td class="font-title">4</td>
+                <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                <td><span class="badge badge-blue">2 docs</span></td>
+                <td><span class="text-xs text-muted">—</span></td>
+                <td><button class="btn btn-ghost btn-sm">Ver</button></td>
+              </tr>
+              <tr>
+                <td class="text-sm fw-black">1.2</td>
+                <td><span class="badge badge-blue">P</span></td>
+                <td class="text-base fw-bold">Política de SST firmada, datada y comunicada al SGSST</td>
+                <td><span class="pill-gray">Art. 7</span></td>
+                <td class="font-title">1</td>
+                <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                <td><span class="badge badge-blue">1 doc</span></td>
+                <td><span class="text-xs text-muted">—</span></td>
+                <td><button class="btn btn-ghost btn-sm">Ver</button></td>
+              </tr>
+              <tr class="bg-naranja-soft">
+                <td class="text-sm fw-black">1.4</td>
+                <td><span class="badge badge-blue">P</span></td>
+                <td class="text-base fw-bold text-warning">Plan de trabajo anual firmado por el empleador y responsable SST</td>
+                <td><span class="pill-gray">Art. 8</span></td>
+                <td class="font-title">2</td>
+                <td><span class="badge badge-orange"><span class="bdot"></span>En proceso</span></td>
+                <td><span class="badge badge-gray">0 docs</span></td>
+                <td><span class="text-xs text-warning fw-bold">Sin firma empleador</span></td>
+                <td><button class="btn btn-primary btn-sm" onclick="showView('v-evidencias')">+ Cargar</button></td>
+              </tr>
+              <!-- HACER -->
+              <tr class="tr-hacer"><td colspan="9" class="section-header text-warning">HACER (H) — 60 puntos</td></tr>
+              <tr>
+                <td class="text-sm fw-black">2.1</td>
+                <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                <td class="text-base fw-bold">Afiliación al Sistema General de Seguridad Social Integral</td>
+                <td><span class="pill-gray">Art. 10</span></td>
+                <td class="font-title">0.5</td>
+                <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                <td><span class="badge badge-blue">1 doc</span></td>
+                <td><span class="text-xs text-muted">—</span></td>
+                <td><button class="btn btn-ghost btn-sm">Ver</button></td>
+              </tr>
+              <tr class="bg-naranja-soft">
+                <td class="text-sm fw-black">2.2</td>
+                <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                <td class="text-base fw-bold text-warning">Capacitación, inducción y reinducción en SST · Plan anual</td>
+                <td><span class="pill-gray">Art. 11</span></td>
+                <td class="font-title">2</td>
+                <td><span class="badge badge-orange"><span class="bdot"></span>En proceso</span></td>
+                <td><span class="badge badge-blue">1 doc</span></td>
+                <td><span class="text-xs text-warning fw-bold">16 trab. sin inducción</span></td>
+                <td><button class="btn btn-primary btn-sm" onclick="showView('v-capacitaciones')">Completar</button></td>
+              </tr>
+              <tr class="bg-danger">
+                <td class="text-sm fw-black">2.3</td>
+                <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                <td class="text-base fw-bold text-danger">⚠ COPASST o Vigía de SST constituido y en funcionamiento</td>
+                <td><span class="pill-gray">Art. 12</span></td>
+                <td class="font-title">0.5</td>
+                <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                <td><span class="badge badge-gray">0 docs</span></td>
+                <td><span class="text-xs text-danger fw-bold">No conformado</span></td>
+                <td><button class="btn btn-primary btn-sm">Iniciar</button></td>
+              </tr>
+              <tr class="bg-danger">
+                <td class="text-sm fw-black">2.5</td>
+                <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                <td class="text-base fw-bold text-danger">⚠ Investigación de AT, EL e incidentes y sus efectos correctivos</td>
+                <td><span class="pill-gray">Art. 13</span></td>
+                <td class="font-title">5</td>
+                <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                <td><span class="badge badge-gray">0 docs</span></td>
+                <td><span class="text-xs text-danger fw-bold">Sin procedimiento</span></td>
+                <td><button class="btn btn-primary btn-sm">Iniciar</button></td>
+              </tr>
+              <tr>
+                <td class="text-sm fw-black">2.8</td>
+                <td><span class="badge badge-orange" class="bg-warning text-warning">H</span></td>
+                <td class="text-base fw-bold">Exámenes médicos ocupacionales: pre ingreso, periódico, retiro</td>
+                <td><span class="pill-gray">Art. 10</span></td>
+                <td class="font-title">5</td>
+                <td><span class="badge badge-green"><span class="bdot"></span>Cumple</span></td>
+                <td><span class="badge badge-blue">4 docs</span></td>
+                <td><span class="text-xs text-muted">—</span></td>
+                <td><button class="btn btn-ghost btn-sm">Ver</button></td>
+              </tr>
+              <!-- VERIFICAR -->
+              <tr class="tr-verificar"><td colspan="9" class="section-header text-success">VERIFICAR (V) — 5 puntos</td></tr>
+              <tr class="bg-naranja-soft">
+                <td class="text-sm fw-black">3.1</td>
+                <td><span class="badge badge-green">V</span></td>
+                <td class="text-base fw-bold text-warning">Revisión por la alta dirección (mínimo una vez al año)</td>
+                <td><span class="pill-gray">Art. 14</span></td>
+                <td class="font-title">4</td>
+                <td><span class="badge badge-orange"><span class="bdot"></span>En proceso</span></td>
+                <td><span class="badge badge-gray">0 docs</span></td>
+                <td><span class="text-xs text-warning fw-bold">Programada para Feb</span></td>
+                <td><button class="btn btn-primary btn-sm" onclick="showView('v-evidencias')">+ Cargar</button></td>
+              </tr>
+              <!-- ACTUAR -->
+              <tr class="tr-actuar"><td colspan="9" class="section-header text-danger">ACTUAR (A) — 10 puntos</td></tr>
+              <tr class="bg-danger">
+                <td class="text-sm fw-black">4.1</td>
+                <td><span class="badge badge-red">A</span></td>
+                <td class="text-base fw-bold text-danger">⚠ Acciones preventivas y correctivas con base en resultados del SG-SST</td>
+                <td><span class="pill-gray">Art. 15</span></td>
+                <td class="font-title">10</td>
+                <td><span class="badge badge-red"><span class="bdot"></span>No cumple</span></td>
+                <td><span class="badge badge-gray">0 docs</span></td>
+                <td><span class="text-xs text-danger fw-bold">Sin sistema de AC</span></td>
+                <td><button class="btn btn-primary btn-sm">Iniciar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: AUTOEVALUACIÓN ════ -->
+    <div id="v-autoevaluacion" class="view" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Autoevaluación Anual — 2025</div>
+          <div class="page-subtitle">Res. 0312/2019 Art. 27 · Diligenciamiento obligatorio · Capítulo II</div>
+        </div>
+        <div class="flex-gap">
+          <button class="btn btn-ghost btn-sm">Guardar borrador</button>
+          <button class="btn btn-primary btn-sm">📤 Enviar a dirección</button>
+        </div>
+      </div>
+
+      <div class="g64" class="items-start">
+        <div class="cycle-list">
+          <!-- PLANEAR -->
+          <div class="card">
+            <div class="flex-row-item">
+              <div class="kpi-mini kpi-mini--blue">P</div>
+              <div class="flex-1"><div class="text-md fw-black text-dark">PLANEAR — Gestión del SG-SST (25 pts)</div><div class="text-sm text-muted">Obtenido: 19 / 25 pts</div></div>
+              <div class="cycle-val cycle-val--blue">76%</div>
+            </div>
+            <div class="ae-item cumple">
+              <div class="ae-check c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ae-info"><div class="ae-code">1.1.1</div><div class="ae-name">Responsabilidades en SST documentadas y asignadas</div><div class="ae-ref">Res. 0312 · Estándar 1.1 · 0.5 pts</div></div>
+              <div class="ae-pts">0.5</div>
+            </div>
+            <div class="ae-item cumple">
+              <div class="ae-check c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ae-info"><div class="ae-code">1.1.2</div><div class="ae-name">Presupuesto para el SG-SST asignado y aprobado</div><div class="ae-ref">Res. 0312 · Estándar 1.1 · 0.5 pts</div></div>
+              <div class="ae-pts">0.5</div>
+            </div>
+            <div class="ae-item cumple">
+              <div class="ae-check c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ae-info"><div class="ae-code">1.2.1</div><div class="ae-name">Política SST firmada, fechada y comunicada</div><div class="ae-ref">Res. 0312 · Estándar 1.2 · 1 pt</div></div>
+              <div class="ae-pts">1</div>
+            </div>
+            <div class="ae-item">
+              <div class="ae-check na"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+              <div class="ae-info"><div class="ae-code">1.4.1</div><div class="ae-name">Plan de trabajo anual aprobado y firmado por empleador</div><div class="ae-ref">Res. 0312 · Estándar 1.4 · 2 pts</div></div>
+              <div class="ae-pts" class="text-warning">1</div>
+            </div>
+          </div>
+
+          <!-- HACER -->
+          <div class="card">
+            <div class="flex-row-item">
+              <div class="kpi-mini kpi-mini--orange">H</div>
+              <div class="flex-1"><div class="text-md fw-black text-dark">HACER — Gestión integral (60 pts)</div><div class="text-sm text-muted">Obtenido: 28 / 60 pts</div></div>
+              <div class="cycle-val cycle-val--orange">47%</div>
+            </div>
+            <div class="ae-item cumple">
+              <div class="ae-check c"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ae-info"><div class="ae-code">2.1.1</div><div class="ae-name">Descripción sociodemográfica y diagnóstico de condiciones de salud</div><div class="ae-ref">Estándar 2.1 · 1 pt</div></div>
+              <div class="ae-pts">1</div>
+            </div>
+            <div class="ae-item no-cumple">
+              <div class="ae-check nc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="ae-info"><div class="ae-code">2.2.1</div><div class="ae-name">Actividades de medicina del trabajo y prevención de riesgos laborales</div><div class="ae-ref">Estándar 2.2 · 1 pt</div></div>
+              <div class="ae-pts zero">0</div>
+            </div>
+            <div class="ae-item no-cumple">
+              <div class="ae-check nc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="ae-info"><div class="ae-code">2.3.1</div><div class="ae-name">Identificación y evaluación de riesgos con metodología GTC-45</div><div class="ae-ref">Estándar 2.3 · 4 pts</div></div>
+              <div class="ae-pts zero">0</div>
+            </div>
+            <div class="ae-item no-cumple">
+              <div class="ae-check nc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="ae-info"><div class="ae-code">2.5.1</div><div class="ae-name">Investigación de accidentes de trabajo y enfermedades laborales</div><div class="ae-ref">Estándar 2.5 · 5 pts</div></div>
+              <div class="ae-pts zero">0</div>
+            </div>
+          </div>
+
+          <!-- ACTUAR -->
+          <div class="card">
+            <div class="flex-row-item">
+              <div class="kpi-mini kpi-mini--red">A</div>
+              <div class="flex-1"><div class="text-md fw-black text-dark">ACTUAR — Mejora continua (10 pts)</div><div class="text-sm text-muted">Obtenido: 0 / 10 pts</div></div>
+              <div class="cycle-val cycle-val--red">0%</div>
+            </div>
+            <div class="ae-item no-cumple">
+              <div class="ae-check nc"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+              <div class="ae-info"><div class="ae-code">4.1.1</div><div class="ae-name">Definición de acciones preventivas y correctivas con base en resultados del SG-SST</div><div class="ae-ref">Estándar 4.1 · 10 pts</div></div>
+              <div class="ae-pts zero">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel resultado autoevaluación (sticky) -->
+        <div class="sticky-col">
+          <div class="result-card">
+            <div class="rc-label">Resultado Autoevaluación 2025</div>
+            <div class="rc-val">62%</div>
+            <div class="rc-chip rc-moderado">⚡ MODERADAMENTE ACEPTABLE</div>
+            <div class="rc-desc">Entre 60% y 85%: requiere plan de mejoramiento inmediato. (Art. 28 aplica si < 60%)</div>
+            <div class="summary-row">
+              <div class="text-center"><div class="summary-val summary-val--orange">62</div><div class="label-faint">Pts obtenidos</div></div>
+              <div class="text-center"><div class="summary-val summary-val--red">38</div><div class="label-faint">Pts faltantes</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title mb-10">Escala de calificación</div>
+            <div class="scale-item scale-critico">
+              <div class="scale-dot scale-dot--red"></div>
+              <div><div class="text-sm fw-black text-danger">Crítico: menos de 60%</div><div class="text-xs text-muted">Plan correc. inmediato + Art. 28</div></div>
+            </div>
+            <div class="scale-item scale-moderado">
+              <div class="scale-dot" class="bg-amarillo"></div>
+              <div><div class="text-sm fw-black text-warning">Moderado: 60%–85% ✓ ACTUAL</div><div class="text-xs text-muted">Plan de mejora en 6 meses</div></div>
+            </div>
+            <div class="scale-item scale-aceptable">
+              <div class="scale-dot scale-dot--green"></div>
+              <div><div class="text-sm fw-black text-success">Aceptable: más de 85%</div><div class="text-xs text-muted">Mejora continua y seguimiento</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title mb-12">Acciones</div>
+            <div class="flex-col-gap">
+              <button class="btn btn-primary" class="w-full-center">📤 Enviar a Alta Dirección</button>
+              <button class="btn btn-ghost" class="w-full-center">📄 Generar informe PDF</button>
+              <button class="btn btn-ghost" class="w-full-center">📋 Ver plan de mejora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: EVIDENCIAS ════ -->
+    <div id="v-evidencias" class="view" class="view">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Cargar y Gestionar Evidencias</div>
+          <div class="page-subtitle">28 documentos cargados · Asociados a estándares mínimos Res. 0312/2019</div>
+        </div>
+      </div>
+
+      <div class="g64" class="items-start">
+        <div>
+          <div class="card mb-16">
+            <div class="card-header"><div class="card-title">Nueva evidencia</div></div>
+            <div class="upload-area">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gris-texto)" stroke-width="1.5" class="upload-svg"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              <div class="text-md fw-bold text-muted">Arrastra o haz clic para subir</div>
+              <div class="upload-hint">PDF, Word, Excel, JPG, PNG · Máx. 20 MB</div>
+            </div>
+            <div class="g2 mb-0">
+              <div>
+                <div class="form-group">
+                  <div class="form-label">Estándar relacionado</div>
+                  <select class="form-input form-select">
+                    <option>⚠ 2.3 — COPASST o Vigía SST</option>
+                    <option>⚠ 2.5 — Investigación AT y EL</option>
+                    <option>1.4 — Plan de trabajo anual</option>
+                    <option>2.2 — Capacitaciones SST</option>
+                    <option>3.1 — Revisión alta dirección</option>
+                    <option>4.1 — Acciones correctivas</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-label">Tipo de documento</div>
+                  <select class="form-input form-select">
+                    <option>Acta / Documento formal</option>
+                    <option>Lista de asistencia</option>
+                    <option>Registro fotográfico</option>
+                    <option>Certificado</option>
+                    <option>Informe</option>
+                    <option>Planilla / Formato</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <div class="form-group">
+                  <div class="form-label">Fecha del documento</div>
+                  <input class="form-input" type="date" value="2025-01-20"/>
+                </div>
+                <div class="form-group">
+                  <div class="form-label">Observaciones</div>
+                  <textarea class="form-textarea textarea-sm">Acta de constitución y elección del COPASST período 2025-2026.</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="alert alert-warning">
+              <div><div class="al-title">Estándar crítico sin evidencias</div><div class="al-desc">Este estándar genera riesgo de sanción. Cargue el documento lo antes posible.</div></div>
+            </div>
+            <button class="btn btn-primary" class="btn-full">📤 Subir y asociar evidencia</button>
+          </div>
+
+          <!-- Lista de evidencias -->
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Documentos Cargados (28)</div></div>
+              <select class="form-input form-select select-sm">
+                <option>Todos los estándares</option>
+                <option>⚠ Sin documentos (5)</option>
+                <option>Con documentos (16)</option>
+              </select>
+            </div>
+            <div class="ev-item">
+              <div class="ev-icon ev-pdf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="ev-info"><div class="ev-name">Politica_SST_firmada_2025.pdf</div><div class="ev-meta">Est. 1.2 · 15 Ene 2025 · 245 KB · S. Ríos</div></div>
+              <span class="badge badge-green">Aprobado</span>
+              <button class="btn btn-ghost btn-sm">Ver</button>
+            </div>
+            <div class="ev-item">
+              <div class="ev-icon ev-doc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="ev-info"><div class="ev-name">Plan_trabajo_anual_SGSST_2025.docx</div><div class="ev-meta">Est. 1.4 · 10 Ene 2025 · 1.2 MB · S. Ríos</div></div>
+              <span class="badge badge-orange">Revisión</span>
+              <button class="btn btn-ghost btn-sm">Ver</button>
+            </div>
+            <div class="ev-item">
+              <div class="ev-icon ev-xls"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="ev-info"><div class="ev-name">Planilla_afiliacion_ARL_38_trab.xlsx</div><div class="ev-meta">Est. 2.1 · 08 Ene 2025 · 890 KB · S. Ríos</div></div>
+              <span class="badge badge-green">Aprobado</span>
+              <button class="btn btn-ghost btn-sm">Ver</button>
+            </div>
+            <div class="ev-item">
+              <div class="ev-icon ev-pdf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="ev-info"><div class="ev-name">Acta_capacitacion_SST_22_trab.pdf</div><div class="ev-meta">Est. 2.2 · 12 Ene 2025 · 420 KB · S. Ríos</div></div>
+              <span class="badge badge-orange">Revisión</span>
+              <button class="btn btn-ghost btn-sm">Ver</button>
+            </div>
+            <div class="ev-item ev-item--pending">
+              <div class="ev-icon ev-pdf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+              <div class="ev-info"><div class="ev-name" class="text-danger">⚠ COPASST — Sin documentos</div><div class="ev-meta">Est. 2.3 · Requerido urgente · Sin evidencias</div></div>
+              <span class="badge badge-red">Pendiente</span>
+              <button class="btn btn-primary btn-sm">+ Cargar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel stats -->
+        <div class="sticky-col">
+          <div class="card">
+            <div class="card-title mb-14">Estado de documentación</div>
+            <div class="flex-col-gap">
+              <div class="row-info">
+                <span class="text-base fw-bold">Estándares con docs</span>
+                <span class="badge badge-green">16 de 21</span>
+              </div>
+              <div class="row-info row-info--danger" class="rounded-danger">
+                <span class="text-base fw-bold text-danger">Sin documentar</span>
+                <span class="badge badge-red">5 críticos</span>
+              </div>
+              <div class="row-info">
+                <span class="text-base fw-bold">PDF</span>
+                <span class="badge badge-blue">14 archivos</span>
+              </div>
+              <div class="row-info">
+                <span class="text-base fw-bold">Word / Excel</span>
+                <span class="badge badge-blue">10 archivos</span>
+              </div>
+              <div class="row-info">
+                <span class="text-base fw-bold">Imágenes</span>
+                <span class="badge badge-blue">4 archivos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: PLAN DE TRABAJO ════ -->
+    <div id="v-plan" class="view" class="view">
+      <div class="page-header">
+        <div><div class="page-title">Plan de Trabajo Anual SST — 2025</div><div class="page-subtitle">Programación de actividades según los estándares mínimos</div></div>
+        <button class="btn btn-primary btn-sm">📤 Enviar a firma</button>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Actividad</th><th>Estándar</th><th>Responsable</th><th>Fecha</th><th>Recursos</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td class="td-bold" class="text-base">Conformar COPASST</td><td><span class="badge badge-red">Est. 2.3</span></td><td>S. Ríos</td><td class="text-danger fw-black">31 Ene 2025</td><td>—</td><td><span class="badge badge-red">Pendiente</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Protocolo investigación AT</td><td><span class="badge badge-red">Est. 2.5</span></td><td>S. Ríos</td><td class="text-danger fw-black">31 Ene 2025</td><td>—</td><td><span class="badge badge-red">Pendiente</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Capacitar 16 trab. restantes</td><td><span class="badge badge-orange">Est. 2.2</span></td><td>S. Ríos</td><td>15 Feb 2025</td><td>$500.000</td><td><span class="badge badge-orange">En proceso</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Firmar plan de trabajo</td><td><span class="badge badge-orange">Est. 1.4</span></td><td>C. Mendoza</td><td>28 Ene 2025</td><td>—</td><td><span class="badge badge-orange">Pendiente firma</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Revisión alta dirección</td><td><span class="badge badge-blue">Est. 3.1</span></td><td>C. Mendoza / S. Ríos</td><td>28 Feb 2025</td><td>—</td><td><span class="badge badge-blue">Programada</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Implementar sistema AC</td><td><span class="badge badge-red">Est. 4.1</span></td><td>S. Ríos</td><td>15 Mar 2025</td><td>—</td><td><span class="badge badge-red">Pendiente</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Actualizar matriz de riesgos</td><td><span class="badge badge-blue">Est. 2.6</span></td><td>S. Ríos</td><td>28 Feb 2025</td><td>$200.000</td><td><span class="badge badge-orange">En proceso</span></td></tr>
+              <tr><td class="td-bold" class="text-base">Exámenes médicos periódicos</td><td><span class="badge badge-green">Est. 2.8</span></td><td>EPS / ARL</td><td>30 Mar 2025</td><td>$2.400.000</td><td><span class="badge badge-green">Programados</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ VIEW: CAPACITACIONES ════ -->
+    <div id="v-capacitaciones" class="view" class="view">
+      <div class="page-header">
+        <div><div class="page-title">Gestión de Capacitaciones</div><div class="page-subtitle">Control de inducción y reinducción SST · 38 trabajadores</div></div>
+        <button class="btn btn-primary btn-sm">+ Nueva capacitación</button>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi green"><div class="kpi-bg"></div><div class="kpi-label">Capacitados</div><div class="kpi-val">22</div><div class="kpi-trend trend-up">↑ de 38 total</div></div>
+        <div class="kpi red"><div class="kpi-bg"></div><div class="kpi-label">Pendientes</div><div class="kpi-val">16</div><div class="kpi-trend trend-down">↓ Requieren acción</div></div>
+        <div class="kpi orange"><div class="kpi-bg"></div><div class="kpi-label">% Avance</div><div class="kpi-val">58%</div><div class="kpi-trend trend-neutral">→ Meta: 100%</div></div>
+        <div class="kpi blue"><div class="kpi-bg"></div><div class="kpi-label">Sesiones</div><div class="kpi-val">3</div><div class="kpi-trend trend-up">↑ realizadas</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Trabajadores — Estado de Inducción SST</div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Trabajador</th><th>Cargo</th><th>Área</th><th>Inducción SST</th><th>Reinducción</th><th>Fecha</th><th>Firma</th></tr></thead>
+            <tbody>
+              <tr><td class="td-bold">Carlos Pérez</td><td class="text-sm">Maestro obra</td><td class="text-sm">Construcción</td><td><span class="badge badge-green">✓ Realizada</span></td><td><span class="badge badge-green">✓ 2024</span></td><td class="text-sm">10 Ene 2025</td><td><span class="badge badge-green">✓</span></td></tr>
+              <tr><td class="td-bold">María Torres</td><td class="text-sm">Administradora</td><td class="text-sm">Oficina</td><td><span class="badge badge-green">✓ Realizada</span></td><td><span class="badge badge-blue">Programada</span></td><td class="text-sm">10 Ene 2025</td><td><span class="badge badge-green">✓</span></td></tr>
+              <tr class="bg-danger"><td class="td-bold" class="text-danger">Luis García</td><td class="text-sm">Ayudante</td><td class="text-sm">Construcción</td><td><span class="badge badge-red">✗ Pendiente</span></td><td><span class="badge badge-gray">N/A</span></td><td class="text-sm text-danger">Sin fecha</td><td><span class="badge badge-red">✗</span></td></tr>
+              <tr class="bg-danger"><td class="td-bold" class="text-danger">Ana Rodríguez</td><td class="text-sm">Almacenista</td><td class="text-sm">Logística</td><td><span class="badge badge-red">✗ Pendiente</span></td><td><span class="badge badge-gray">N/A</span></td><td class="text-sm text-danger">Sin fecha</td><td><span class="badge badge-red">✗</span></td></tr>
+              <tr><td class="td-bold">Julián Mora</td><td class="text-sm">Electricista</td><td class="text-sm">Construcción</td><td><span class="badge badge-green">✓ Realizada</span></td><td><span class="badge badge-green">✓ 2024</span></td><td class="text-sm">12 Ene 2025</td><td><span class="badge badge-green">✓</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert-banner alert-banner--danger">
+          ⚠ 16 trabajadores sin completar inducción SST. Programar sesión antes del 15 Feb 2025.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+  <script src="js/responsable.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => showView('v-panel'));
+  </script>
+</body>
+</html>
